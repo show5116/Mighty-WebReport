@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@61.98.142.166:1521:SOLUTION
+    username: mighty_sawnics
+    password: mighty
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: oracle
+    database-platform: org.hibernate.dialect.OracleDialect
+logging:
+  level:
+    org:
+      hibernate: info
