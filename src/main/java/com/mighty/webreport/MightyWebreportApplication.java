@@ -1,4 +1,4 @@
-package com.ibs.mighty.mightywebreport;
+package com.mighty.webreport;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -37,3 +37,4 @@ out/
 .vscode/
 /gradle/
 /src/test/
+/src/main/java/com/mighty/webreport/security/security.properties
