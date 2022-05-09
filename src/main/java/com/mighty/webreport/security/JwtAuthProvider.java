@@ -1,7 +1,11 @@
 package com.mighty.webreport.security;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,65 +13,69 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Base64;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.security.Key;
 
 @RequiredArgsConstructor
 @Component
 @PropertySource("classpath:security.properties")
 public class JwtAuthProvider {
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthProvider.class);
+
     @Value("${jwt.secretKey}")
     private String atSecretKey;
 
-    @PostConstruct
-    protected void init(){
-        atSecretKey = Base64.getEncoder().encodeToString(atSecretKey.getBytes());
+    @Value("${jwt.expireMs}")
+    private int expireMs;
+
+    private Key getSignKey(){
+        return Keys.hmacShaKeyFor(atSecretKey.getBytes(StandardCharsets.UTF_8));
     }
+
 
     private final UserDetailsService userDetailsService;
 
-    public String createToken(String userId){
+    public String createToken(Authentication authentication){
 
-        Date date = new Date();
+        AccountContext accountContext = (AccountContext)authentication.getPrincipal();
 
-        final JwtBuilder builder = Jwts.builder()
-                .setHeaderParam("typ","JWT")
-                .setSubject("accesstoken")
-                .setExpiration(new Date(date.getTime() + (1000L * 60 * 60 * 12)))
-                .claim("userId",userId)
-                .signWith(SignatureAlgorithm.HS256,atSecretKey);
+        Date now = new Date();
+        Date expire = new Date(now.getTime() + expireMs);
 
-        return builder.compact();
+        return Jwts.builder()
+                .setSubject(accountContext.getId())
+                .setIssuedAt(new Date())
+                .setExpiration(expire)
+                .signWith(getSignKey())
+                .compact();
     }
 
     public String getUserId(String token) {
-        return Jwts.parser().setSigningKey(atSecretKey).parseClaimsJws(token).getBody().getSubject();
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getSignKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.getSubject();
     }
 
-    @SuppressWarnings("unchecked")
-    public Authentication getAuthentication(String token){
-        Claims claims = Jwts.parser().setSigningKey(atSecretKey).parseClaimsJws(token).getBody();
-
-        String userId = claims.get("userId", String.class);
-
-        AccountContext accountContext = new AccountContext();
-        return new UsernamePasswordAuthenticationToken(accountContext,"",accountContext.getAuthorities());
-
-    }
-
-    public String resolveToken(HttpServletRequest request){
-        return request.getHeader("accesstoken");
-    }
-
-    public boolean validateToken(String token){
+    public boolean validateToken(String authToken) {
         try {
-            Jws<Claims> claims = Jwts.parser().setSigningKey(atSecretKey).parseClaimsJws(token);
-            return !claims.getBody().getExpiration().before(new Date());
-        } catch (Exception e){
-            return false;
+            Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(authToken);
+            return true;
+        } catch (MalformedJwtException ex) {
+            logger.error("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            logger.error("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            logger.error("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            logger.error("JWT claims string is empty.");
         }
+        return false;
     }
+
 }
