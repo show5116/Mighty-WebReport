@@ -14,3 +14,6 @@ logging:
   level:
     org:
       hibernate: info
+app:
+  cors:
+    allowedOrigins: http://localhost:3000

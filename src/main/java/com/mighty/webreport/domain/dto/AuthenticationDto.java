@@ -13,5 +13,6 @@ public class AuthenticationDto {
 
     private String id;
 
+    private String password;
 
 }

@@ -63,7 +63,6 @@ public class Member {
     private String EXPAND_FIELD2;
     private String EXPAND_FIELD10;
     private String EXPAND_FIELD1;
-    private String EMAIL_ID;
     private String DESCRIPTION;
     private String DEPARTMENT;
     private String ADMISSION;

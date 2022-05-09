@@ -8,9 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -34,8 +32,6 @@ public class JwtAuthProvider {
         return Keys.hmacShaKeyFor(atSecretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-
-    private final UserDetailsService userDetailsService;
 
     public String createToken(Authentication authentication){
 
