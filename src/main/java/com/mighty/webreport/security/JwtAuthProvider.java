@@ -17,7 +17,7 @@ import java.security.Key;
 
 @RequiredArgsConstructor
 @Component
-@PropertySource("classpath:security.properties")
+@PropertySource("classpath:/security.properties")
 public class JwtAuthProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthProvider.class);
@@ -36,7 +36,6 @@ public class JwtAuthProvider {
     public String createToken(Authentication authentication){
 
         AccountContext accountContext = (AccountContext)authentication.getPrincipal();
-
         Date now = new Date();
         Date expire = new Date(now.getTime() + expireMs);
 

@@ -1,7 +1,7 @@
 package com.mighty.webreport.security;
 
-import com.mighty.webreport.domain.entity.Member;
-import com.mighty.webreport.domain.repository.MemberRepository;
+import com.mighty.webreport.domain.entity.admin.Member;
+import com.mighty.webreport.domain.repository.admin.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,10 +18,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findById(username)
+        Member member = memberRepository.findByUserId(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with username : " + username));
 
-        return new AccountContext(member);
+        AccountContext accountContext = new AccountContext(member);
+        return accountContext;
     }
 }

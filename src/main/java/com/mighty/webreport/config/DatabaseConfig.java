@@ -1,0 +1,29 @@
+package com.mighty.webreport.config;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+import javax.sql.DataSource;
+
+@Configuration
+@RequiredArgsConstructor
+public class DatabaseConfig {
+
+    private final GlobalPropertySource propertySource;
+
+    @Bean
+    @Primary
+    public DataSource customDataSource() {
+        return DataSourceBuilder
+                .create()
+                .url(propertySource.getUrl())
+                .driverClassName(propertySource.getDriverClassName())
+                .username(propertySource.getUsername())
+                .password(propertySource.getPassword())
+                .build();
+    }
+
+}
