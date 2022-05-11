@@ -8,6 +8,7 @@ const color = {
     lightgray: '#e7e7e7',
     darkgray: '#555555',
     gray: '#999',
+    white: '#fefefe',
 }
 
 export default color;

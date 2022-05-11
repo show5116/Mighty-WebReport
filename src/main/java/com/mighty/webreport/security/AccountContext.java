@@ -1,7 +1,7 @@
 package com.mighty.webreport.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mighty.webreport.domain.entity.Member;
+import com.mighty.webreport.domain.entity.admin.Member;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,7 +29,7 @@ public class AccountContext implements UserDetails {
 
         this.id = member.getUserId();
         this.name = member.getUserName();
-        this.password = member.getPassword();
+        this.password = member.getPasswordMD5();
         this.authorities = authorityList;
 
     }
@@ -45,12 +45,12 @@ public class AccountContext implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.name;
     }
 
     @Override
