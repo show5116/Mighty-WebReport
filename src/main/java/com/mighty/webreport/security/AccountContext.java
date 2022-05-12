@@ -18,6 +18,8 @@ public class AccountContext implements UserDetails {
 
     private String name;
 
+    private String plant;
+
     @JsonIgnore
     private String password;
 
@@ -29,18 +31,25 @@ public class AccountContext implements UserDetails {
 
         this.id = member.getUserId();
         this.name = member.getUserName();
+        this.plant = member.getPlant();
         this.password = member.getPasswordMD5();
         this.authorities = authorityList;
 
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public void setPlant(String plant) {
+        this.plant = plant;
     }
 
     public String getId(){
         return this.id;
+    }
+
+    public String getPlant() { return this.plant; }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
     }
 
     @Override

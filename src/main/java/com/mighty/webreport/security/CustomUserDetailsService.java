@@ -16,7 +16,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member member = memberRepository.findByUserId(username)
                 .orElseThrow(() ->
@@ -25,4 +25,16 @@ public class CustomUserDetailsService implements UserDetailsService {
         AccountContext accountContext = new AccountContext(member);
         return accountContext;
     }
+
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsernameAndPlant(AuthToken authToken) throws UsernameNotFoundException {
+        Member member = memberRepository.findByUserIdAndPlant(authToken.getId(), authToken.getPlant())
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("User not found with username and plant : " + authToken.getId() + " , " + authToken.getPlant()));
+
+        AccountContext accountContext = new AccountContext(member);
+        return accountContext;
+    }
+
+
 }

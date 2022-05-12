@@ -5,6 +5,7 @@ import com.mighty.webreport.domain.dto.JwtAuthenticationResponse;
 import com.mighty.webreport.domain.entity.admin.Plant;
 import com.mighty.webreport.domain.repository.admin.member.MemberRepository;
 import com.mighty.webreport.domain.repository.admin.plant.PlantRepositoryCustom;
+import com.mighty.webreport.security.AccountContext;
 import com.mighty.webreport.security.JwtAuthProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +46,9 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(
           usernamePasswordAuthenticationToken
         );
+
+        AccountContext accountContext = (AccountContext) authentication.getPrincipal();
+        accountContext.setPlant(authenticationDto.getPlant());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = provider.createToken(authentication);

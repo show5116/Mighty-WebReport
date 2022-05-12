@@ -15,4 +15,6 @@ public class AuthenticationDto {
 
     private String password;
 
+    private String plant;
+
 }

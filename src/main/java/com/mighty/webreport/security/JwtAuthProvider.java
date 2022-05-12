@@ -40,21 +40,25 @@ public class JwtAuthProvider {
         Date expire = new Date(now.getTime() + expireMs);
 
         return Jwts.builder()
-                .setSubject(accountContext.getId())
+                .setSubject("authToken")
+                .claim("id",accountContext.getId())
+                .claim("plant",accountContext.getPlant())
                 .setIssuedAt(new Date())
                 .setExpiration(expire)
                 .signWith(getSignKey())
                 .compact();
     }
 
-    public String getUserId(String token) {
+    public AuthToken getUser(String token) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getSignKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
 
-        return claims.getSubject();
+        return AuthToken.builder()
+                .id((String) claims.get("id"))
+                .plant((String) claims.get("plant")).build();
     }
 
     public boolean validateToken(String authToken) {
