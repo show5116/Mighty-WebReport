@@ -4,7 +4,7 @@ export interface IMemberTable {
 
 export interface IPlantTable {
     id : string;
-    description : string;
+    description? : string | null;
     numberOfShift : number;
     activePlant : string;
     daysPerWeek : number;

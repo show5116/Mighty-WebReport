@@ -4,12 +4,18 @@ interface IProps extends React.SelectHTMLAttributes<HTMLButtonElement> {
     text : string;
     color? : string;
     to?: string;
+    disabled? : boolean;
 }
 
-const Button = ({ text , color , to }: IProps) => {
+const Button = ({ text , color , to , disabled = false , ...props }: IProps) => {
     return (
         <S.Container
-            color={color}>
+            style={{
+                backgroundColor : color
+            }}
+            disabled={disabled}
+            {...props}
+        >
             {text}
         </S.Container>
     );

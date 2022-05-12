@@ -6,13 +6,10 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {createStore} from "redux";
 import rootReducer from "./modules";
-import createSagaMiddleware from "redux-saga";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer);
 

@@ -29,8 +29,10 @@ export const Container = styled.div`
           margin-bottom: 15px;
         }
       }
+      .button-container{
+        margin-left: auto;
+        width: 100px;
+      }
     }
   }
-  
-  
 `;

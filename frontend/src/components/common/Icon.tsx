@@ -1,4 +1,4 @@
-import { iconName, IconSet } from "./constants";
+import { iconName, IconSet } from "../../assets/svg/constants";
 
 interface IconProps {
     icon : iconName;

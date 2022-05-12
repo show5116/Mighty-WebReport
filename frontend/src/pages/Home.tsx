@@ -1,8 +1,12 @@
+import * as S from './style.Home';
+
 const Home = () => {
     return (
-        <div>
-            홈
-        </div>
+        <S.Container>
+            <div className='home-container'>
+
+            </div>
+        </S.Container>
     );
 }
 

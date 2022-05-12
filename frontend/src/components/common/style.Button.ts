@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import color from "../../styles/color";
 
 export const Container = styled.button`
   cursor: pointer;
@@ -8,7 +9,12 @@ export const Container = styled.button`
   font-size: 20px;
   font-weight: bold;
   position: relative;
-  box-shadow: rgba(0,0,0,0.19) 0px 10px 20px,rgba(0,0,0,0.23) 0px 6px 9px;
+  box-shadow: rgba(0,0,0,0.20) 0px 2px 4px;
+  &:disabled{
+    cursor : default;
+    color : inherit;
+    background-color: ${color.lightgray} !important;;
+  }
   .buttonText {
     width: 100%;
     margin: 0;
