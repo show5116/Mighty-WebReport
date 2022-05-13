@@ -139,7 +139,7 @@ const Login = () => {
                     />
                     <div className="button-container">
                         <Button
-                            disabled={plant===""}
+                            disabled={plant===""||password===""}
                             color={color.babyBlue}
                             text="로그인"
                         />
