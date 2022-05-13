@@ -49,9 +49,9 @@ public class AuthController {
 
         AccountContext accountContext = (AccountContext) authentication.getPrincipal();
         accountContext.setPlant(authenticationDto.getPlant());
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = provider.createToken(authentication);
+
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 }

@@ -61,20 +61,9 @@ public class JwtAuthProvider {
                 .plant((String) claims.get("plant")).build();
     }
 
-    public boolean validateToken(String authToken) {
-        try {
-            Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(authToken);
-            return true;
-        } catch (MalformedJwtException ex) {
-            logger.error("Invalid JWT token");
-        } catch (ExpiredJwtException ex) {
-            logger.error("Expired JWT token");
-        } catch (UnsupportedJwtException ex) {
-            logger.error("Unsupported JWT token");
-        } catch (IllegalArgumentException ex) {
-            logger.error("JWT claims string is empty.");
-        }
-        return false;
+    public boolean validateToken(String authToken) throws Exception {
+        Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(authToken);
+        return true;
     }
 
 }

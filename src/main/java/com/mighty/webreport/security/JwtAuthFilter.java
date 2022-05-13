@@ -1,5 +1,8 @@
 package com.mighty.webreport.security;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,8 +43,16 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
-        }catch (Exception e){
-            logger.error("Could not set user authentication in security context",e);
+        }catch (SecurityException | MalformedJwtException e) {
+            request.setAttribute("exception", ExceptionCode.WRONG_TYPE_TOKEN.getCode());
+        } catch (ExpiredJwtException e) {
+            request.setAttribute("exception", ExceptionCode.EXPIRED_TOKEN.getCode());
+        } catch (UnsupportedJwtException e) {
+            request.setAttribute("exception", ExceptionCode.UNSUPPORTED_TOKEN.getCode());
+        } catch (IllegalArgumentException e) {
+            request.setAttribute("exception", ExceptionCode.WRONG_TOKEN.getCode());
+        } catch (Exception e) {
+            request.setAttribute("exception", ExceptionCode.UNKNOWN_ERROR.getCode());
         }
 
         filterChain.doFilter(request,response);
