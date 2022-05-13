@@ -17,5 +17,6 @@ $ npm i redux-devtools-extension
 $ npm i redux-logger
 $ npm i @reduxjs/toolkit react-redux
 $ npm i redux-saga
+$ npm i redux-persist
 $ npm i immer
 ```

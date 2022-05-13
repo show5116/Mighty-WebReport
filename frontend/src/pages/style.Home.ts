@@ -5,7 +5,7 @@ export const Container = styled.div`
   min-width: 1000px;
   min-height: 600px;
   .home-container {
-    padding: 265px 15px;
+    padding: 266px 15px;
     margin: auto;
     background-image: url(${backGroundImg});
     background-position: center center;

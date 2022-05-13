@@ -11,6 +11,7 @@ import {IPlantTable} from "../../types/userData";
 import {useDispatch} from "react-redux";
 import {showAlertModal} from "../../modules/action/alertAction";
 import {useNavigate} from "react-router-dom";
+import {setLogIn} from "../../modules/action/authAction";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Login = () => {
     const [plants,setPlants] = useState<Array<Option>>([{text: "PLANT", value: "NotC"}]);
 
     const onChangeId = (event : React.ChangeEvent<HTMLInputElement>) => {
-        setUserId(event.target.value);
+        setUserId(event.target.value.toUpperCase());
     }
 
     const onChangePassword = (event : React.ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +46,7 @@ const Login = () => {
             await ApiUtil.post("/auth/signin", user)
                 .then((res)=>{
                     localStorage.setItem('auth-token' , res.data.accessToken);
+                    dispatch(setLogIn());
                     navigate("/")
                 })
                 .catch((error)=>{
@@ -104,6 +106,7 @@ const Login = () => {
     const svgColor = color.gray;
     const Account = () => (<Icon icon="account" size={svgSize} color={svgColor} />)
     const Lock = () => (<Icon icon="lock" size={svgSize} color={svgColor} />)
+    const Factory = () => (<Icon icon="factory" size={20} />);
 
     return (
         <S.Container>
@@ -129,7 +132,11 @@ const Login = () => {
                         place="비밀번호를 입력해주세요"
                         required={true}
                         type="password" />
-                    <Select options={plants} onChange={onChangeSelect} />
+                    <Select
+                        options={plants}
+                        onChange={onChangeSelect}
+                        svg={<Factory />}
+                    />
                     <div className="button-container">
                         <Button
                             disabled={plant===""}

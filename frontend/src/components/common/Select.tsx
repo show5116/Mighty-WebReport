@@ -4,13 +4,14 @@ import {Option} from "../../types/type";
 
 interface IProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
     options?: Option[];
+    svg? : JSX.Element | JSX.Element[];
 };
 
-const Select = ({options = [{text : "PLANT"}] , ...props}:IProps) => {
+const Select = ({options = [{text : "PLANT"}] , svg , ...props}:IProps) => {
 
     return (
         <S.Container>
-            <span className="select-icon"></span>
+            <span className="select-icon">{svg}</span>
             <select className="select-box"
                 {...props}
             >
