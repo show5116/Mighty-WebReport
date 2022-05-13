@@ -10,9 +10,14 @@ export const Container = styled.button`
   font-weight: bold;
   position: relative;
   box-shadow: rgba(0,0,0,0.20) 0px 2px 4px;
+  transition: 0.15s ease-in-out;
+  &:hover{
+    opacity: 0.7;
+  }
   &:disabled{
     cursor : default;
     color : inherit;
+    opacity: 1.0;
     background-color: ${color.lightgray} !important;;
   }
   .buttonText {

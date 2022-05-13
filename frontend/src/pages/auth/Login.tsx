@@ -10,8 +10,10 @@ import {Option} from "../../types/type";
 import {IPlantTable} from "../../types/userData";
 import {useDispatch} from "react-redux";
 import {showAlertModal} from "../../modules/action/alertAction";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [userId,setUserId] = useState("");
     const [password,setPassword] = useState("");
@@ -42,11 +44,15 @@ const Login = () => {
         async function callAPI(){
             await ApiUtil.post("/auth/signin", user)
                 .then((res)=>{
-                    console.log(res);
+                    localStorage.setItem('auth-token' , res.data.accessToken);
+                    navigate("/")
                 })
                 .catch((error)=>{
-                    console.log(error);
-                    dispatch(showAlertModal('경고 메세지','비밀번호','가 틀렸습니다.',undefined));
+                    if(error.response.data.code === "000"){
+                        dispatch(showAlertModal('경고 메세지','비밀번호','가 틀렸습니다.',undefined));
+                    }else{
+                        dispatch(showAlertModal('경고 메세지','','알 수 없는 문제가 발생했습니다.',undefined));
+                    }
                 });
         }
 
