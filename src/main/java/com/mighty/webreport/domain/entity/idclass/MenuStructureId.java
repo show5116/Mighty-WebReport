@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class MenuGroupId implements Serializable {
+public class MenuStructureId implements Serializable {
 
     @Column(name = "PLANT")
     private String plant;
@@ -23,4 +23,6 @@ public class MenuGroupId implements Serializable {
     @Column(name = "GROUP_ID")
     private String groupId;
 
+    @Column(name = "MENU_ID")
+    private String menuId;
 }

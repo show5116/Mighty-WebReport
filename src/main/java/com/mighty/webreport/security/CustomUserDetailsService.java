@@ -18,7 +18,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findByUserId(username)
+        String[] inputs = username.split(":");
+        Member member = memberRepository.findByUserIdAndPlant(inputs[0],inputs[1])
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with username : " + username));
 

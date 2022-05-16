@@ -25,6 +25,8 @@ public class AccountContext implements UserDetails {
 
     private Collection<? extends  GrantedAuthority> authorities;
 
+    private Member member;
+
     public AccountContext(Member member){
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority(member.getRole()));
@@ -34,6 +36,7 @@ public class AccountContext implements UserDetails {
         this.plant = member.getPlant();
         this.password = member.getPasswordMD5();
         this.authorities = authorityList;
+        this.member = member;
 
     }
 
@@ -46,6 +49,8 @@ public class AccountContext implements UserDetails {
     }
 
     public String getPlant() { return this.plant; }
+
+    public Member getMember() { return this.member; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

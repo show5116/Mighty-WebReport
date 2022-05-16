@@ -44,15 +44,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }catch (SecurityException | MalformedJwtException e) {
-            request.setAttribute("exception", ExceptionCode.WRONG_TYPE_TOKEN.getCode());
+            request.setAttribute("exception", AuthCode.WRONG_TYPE_TOKEN.getCode());
         } catch (ExpiredJwtException e) {
-            request.setAttribute("exception", ExceptionCode.EXPIRED_TOKEN.getCode());
+            request.setAttribute("exception", AuthCode.EXPIRED_TOKEN.getCode());
         } catch (UnsupportedJwtException e) {
-            request.setAttribute("exception", ExceptionCode.UNSUPPORTED_TOKEN.getCode());
+            request.setAttribute("exception", AuthCode.UNSUPPORTED_TOKEN.getCode());
         } catch (IllegalArgumentException e) {
-            request.setAttribute("exception", ExceptionCode.WRONG_TOKEN.getCode());
+            request.setAttribute("exception", AuthCode.WRONG_TOKEN.getCode());
         } catch (Exception e) {
-            request.setAttribute("exception", ExceptionCode.UNKNOWN_ERROR.getCode());
+            request.setAttribute("exception", AuthCode.UNKNOWN_ERROR.getCode());
         }
 
         filterChain.doFilter(request,response);

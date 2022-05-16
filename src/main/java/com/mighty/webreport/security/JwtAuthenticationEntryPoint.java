@@ -19,37 +19,35 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
         String exception = (String)request.getAttribute("exception");
+        System.out.print("exception : ");
         System.out.println(exception);
 
         //로그인 비밀번호 틀림
         if(exception == null) {
-            setResponse(response, ExceptionCode.WRONG_PASSWORD);
+            setResponse(response, AuthCode.WRONG_PASSWORD);
         }
         //잘못된 타입의 토큰인 경우
-        else if(exception.equals(ExceptionCode.WRONG_TYPE_TOKEN.getCode())) {
-            setResponse(response, ExceptionCode.WRONG_TYPE_TOKEN);
+        else if(exception.equals(AuthCode.WRONG_TYPE_TOKEN.getCode())) {
+            setResponse(response, AuthCode.WRONG_TYPE_TOKEN);
         }
         //토큰 만료된 경우
-        else if(exception.equals(ExceptionCode.EXPIRED_TOKEN.getCode())) {
-            setResponse(response, ExceptionCode.EXPIRED_TOKEN);
+        else if(exception.equals(AuthCode.EXPIRED_TOKEN.getCode())) {
+            setResponse(response, AuthCode.EXPIRED_TOKEN);
         }
         //지원되지 않는 토큰인 경우
-        else if(exception.equals(ExceptionCode.UNSUPPORTED_TOKEN.getCode())) {
-            setResponse(response, ExceptionCode.UNSUPPORTED_TOKEN);
+        else if(exception.equals(AuthCode.UNSUPPORTED_TOKEN.getCode())) {
+            setResponse(response, AuthCode.UNSUPPORTED_TOKEN);
         }
         else {
-            setResponse(response, ExceptionCode.ACCESS_DENIED);
+            setResponse(response, AuthCode.ACCESS_DENIED);
         }
     }
 
-    private void setResponse(HttpServletResponse response, ExceptionCode exceptionCode) throws IOException {
+    private void setResponse(HttpServletResponse response, AuthCode authCode) throws IOException {
         response.setContentType("application/json;charset=UTF-8");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setHeader("code",authCode.getCode());
+        response.setHeader("message",authCode.getMessage());
 
-        JSONObject responseJson = new JSONObject();
-        responseJson.put("message", exceptionCode.getMessage());
-        responseJson.put("code", exceptionCode.getCode());
-
-        response.getWriter().print(responseJson);
     }
 }

@@ -1,0 +1,95 @@
+package com.mighty.webreport.service.impl;
+
+import com.mighty.webreport.domain.dto.AuthenticationDto;
+import com.mighty.webreport.domain.dto.JwtAuthenticationResponse;
+import com.mighty.webreport.domain.dto.MenuResponse;
+import com.mighty.webreport.domain.entity.admin.Member;
+import com.mighty.webreport.domain.entity.idclass.MenuGroupId;
+import com.mighty.webreport.domain.entity.system.MenuGroup;
+import com.mighty.webreport.domain.repository.system.MenuGroupRepository;
+import com.mighty.webreport.domain.repository.system.MenuRepositoryCustom;
+import com.mighty.webreport.security.AccountContext;
+import com.mighty.webreport.security.AuthCode;
+import com.mighty.webreport.security.JwtAuthProvider;
+import com.mighty.webreport.service.LoginService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class LoginServiceImpl implements LoginService {
+
+    private final AuthenticationManager authenticationManager;
+
+    private final JwtAuthProvider provider;
+
+    private final MenuGroupRepository menuGroupRepository;
+
+    private final MenuRepositoryCustom menuRepositoryCustom;
+
+    @Override
+    @Transactional(readOnly = true)
+    public HashMap<String,Object> setAuth(AuthenticationDto authenticationDto){
+        HashMap<String,Object> hashMap = new HashMap<>();
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                new UsernamePasswordAuthenticationToken(
+                        authenticationDto.getId() + ":" + authenticationDto.getPlant(),
+                        authenticationDto.getPassword()
+                );
+
+        Authentication authentication = authenticationManager.authenticate(
+                usernamePasswordAuthenticationToken
+        );
+
+        AccountContext accountContext = (AccountContext) authentication.getPrincipal();
+        accountContext.setPlant(authenticationDto.getPlant());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        Member member = accountContext.getMember();
+
+        MenuGroup menuGroup = menuGroupRepository.findById(MenuGroupId.builder()
+                .groupId(member.getRole())
+                .plant(member.getPlant())
+                .moduleId("WEBREPORT")
+                .build())
+                .orElse(null);
+
+        if(menuGroup==null){
+            hashMap.put("isAuth",false);
+            return hashMap;
+        }
+
+        List<MenuResponse> menus = setMenuDepth(menuRepositoryCustom.getMenu(accountContext.getPlant()));
+        String jwt = provider.createToken(authentication);
+
+        hashMap.put("isAuth",true);
+        hashMap.put("menus",menus);
+        hashMap.put("token",jwt);
+        return hashMap;
+    }
+
+    private List<MenuResponse> setMenuDepth(List<MenuResponse> menus){
+        List<MenuResponse> newMenus = new ArrayList<>();
+        for(int i = 0; i<menus.size();i++){
+            if(menus.get(i).getHasChild()=='Y'){
+                menus.get(i).setChild(new ArrayList<>());
+                newMenus.add(menus.get(i));
+            }else{
+                newMenus.get(newMenus.size()-1).getChild().add(menus.get(i));
+            }
+        }
+
+        return newMenus;
+    }
+}

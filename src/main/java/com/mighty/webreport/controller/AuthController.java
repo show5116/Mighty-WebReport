@@ -1,21 +1,16 @@
 package com.mighty.webreport.controller;
 
 import com.mighty.webreport.domain.dto.AuthenticationDto;
-import com.mighty.webreport.domain.dto.JwtAuthenticationResponse;
 import com.mighty.webreport.domain.entity.admin.Plant;
-import com.mighty.webreport.domain.repository.admin.member.MemberRepository;
 import com.mighty.webreport.domain.repository.admin.plant.PlantRepositoryCustom;
-import com.mighty.webreport.security.AccountContext;
-import com.mighty.webreport.security.JwtAuthProvider;
+import com.mighty.webreport.security.AuthCode;
+import com.mighty.webreport.service.LoginService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -23,11 +18,9 @@ import java.util.List;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-
     private final PlantRepositoryCustom plantRepositoryCustom;
 
-    private final JwtAuthProvider provider;
+    private final LoginService loginService;
 
     @GetMapping("/plant")
     public ResponseEntity<?> getPlantList(@RequestParam String userId){
@@ -37,21 +30,15 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody AuthenticationDto authenticationDto){
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(
-                authenticationDto.getId(),
-                authenticationDto.getPassword()
-        );
-
-        Authentication authentication = authenticationManager.authenticate(
-          usernamePasswordAuthenticationToken
-        );
-
-        AccountContext accountContext = (AccountContext) authentication.getPrincipal();
-        accountContext.setPlant(authenticationDto.getPlant());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = provider.createToken(authentication);
-
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        HashMap<String,Object> hashMap = loginService.setAuth(authenticationDto);
+        HttpHeaders headers = new HttpHeaders();
+        if((boolean)hashMap.get("isAuth")){
+            headers.set("code", AuthCode.LOG_IN.getCode());
+            headers.set("message",AuthCode.LOG_IN.getMessage());
+        }else{
+            headers.set("code", AuthCode.UNAUTHORIZED.getCode());
+            headers.set("message",AuthCode.UNAUTHORIZED.getMessage());
+        }
+        return ResponseEntity.ok().headers(headers).body(hashMap);
     }
 }
