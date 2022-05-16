@@ -16,7 +16,7 @@ const Routing = () => {
     useEffect(()=>{
         if(!authState.isLogin) {
             const token = localStorage.getItem('auth-token');
-            if(!!token){
+            if(!!token && token!==undefined){
                 dispatch(setLogIn());
             }else{
                 navigate("/login");

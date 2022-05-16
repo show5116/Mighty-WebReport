@@ -3,6 +3,8 @@ import LogoutBtn from "./LogoutBtn";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../modules";
 import {Link} from "react-router-dom";
+import Menus from "./Menus";
+import Language from "./Language";
 
 const Header = () => {
     const authState = useSelector((state:RootState) => state.authReducer);
@@ -20,8 +22,14 @@ const Header = () => {
                 </div>
                 {authState.isLogin
                     ?
-                    (<div className='logout-container'>
-                        <LogoutBtn />
+                    (<div className='nav-container'>
+                        <div className='logout-container'>
+                            <Language />
+                            <LogoutBtn />
+                        </div>
+                        <div className='menu-container'>
+                            <Menus />
+                        </div>
                     </div>)
                     : null }
             </div>
