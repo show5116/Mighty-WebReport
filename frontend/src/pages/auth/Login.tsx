@@ -45,16 +45,22 @@ const Login = () => {
         async function callAPI(){
             await ApiUtil.post("/auth/signin", user)
                 .then((res)=>{
-                    localStorage.setItem('auth-token' , res.data.accessToken);
-                    dispatch(setLogIn());
-                    navigate("/")
-                })
-                .catch((error)=>{
-                    if(error.response.data.code === "000"){
+                    console.log(res);
+                    if(res.headers.code==="000"){
                         dispatch(showAlertModal('경고 메세지','비밀번호','가 틀렸습니다.',undefined));
-                    }else{
+                    }else if(res.headers.code==="020" && res.data.token!==undefined){
+                        localStorage.setItem('auth-token' , res.data.token);
+                        localStorage.setItem('menus' , JSON.stringify(res.data.menus));
+                        dispatch(setLogIn());
+                        navigate("/")
+                    }else if(res.headers.code==="006") {
+                        dispatch(showAlertModal('경고 메세지','권한','이 존재하지 않습니다.',undefined));
+                    }else {
                         dispatch(showAlertModal('경고 메세지','','알 수 없는 문제가 발생했습니다.',undefined));
                     }
+                })
+                .catch((error)=>{
+                    dispatch(showAlertModal('경고 메세지','','알 수 없는 문제가 발생했습니다.',undefined));
                 });
         }
 

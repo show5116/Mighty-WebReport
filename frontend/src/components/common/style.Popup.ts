@@ -10,7 +10,10 @@ export const Container = styled.div< { show : boolean } >`
   display: ${(props) => (props.show? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
-  background-color: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.4);
+  ${(props) => props.show && `
+        animation: background-out 0.3s;
+    `}
   z-index: 9999;
   .modal-body{
     position: absolute;
@@ -21,6 +24,7 @@ export const Container = styled.div< { show : boolean } >`
     background-color: ${color.white};
     border-radius: 10px;
     box-shadow: 0 2px 3px 0 rgba(34,36,38,0.15);
+    opacity: 1;
     ${(props) => props.show && `
         animation: fade-in 0.3s;
     `}
@@ -56,6 +60,15 @@ export const Container = styled.div< { show : boolean } >`
     }
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes background-out {
+    from {
+      background: rgba(0,0,0,0);
+    }
+    to {
+      background: rgba(0,0,0,0.4);
     }
   }
 `;
