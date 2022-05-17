@@ -12,6 +12,7 @@ import {useDispatch} from "react-redux";
 import {showAlertModal} from "../../modules/action/alertAction";
 import {useNavigate} from "react-router-dom";
 import {setLogIn} from "../../modules/action/authAction";
+import useTitle from "../../utils/UseHooks";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -21,7 +22,12 @@ const Login = () => {
     const [plant,setPlant] = useState("");
     const [plants,setPlants] = useState<Array<Option>>([{text: "PLANT", value: "NotC"}]);
 
+
     const onChangeId = (event : React.ChangeEvent<HTMLInputElement>) => {
+        const regExp = /[{}[\]/?.,;:|)*~`!^\\-_+┼<>@#$%&'"(=]/gi;
+        if(regExp.test(event.target.value)){
+            return;
+        }
         setUserId(event.target.value.toUpperCase());
     }
 
@@ -45,7 +51,6 @@ const Login = () => {
         async function callAPI(){
             await ApiUtil.post("/auth/signin", user)
                 .then((res)=>{
-                    console.log(res);
                     if(res.headers.code==="000"){
                         dispatch(showAlertModal('경고 메세지','비밀번호','가 틀렸습니다.',undefined));
                     }else if(res.headers.code==="020" && res.data.token!==undefined){
@@ -66,6 +71,8 @@ const Login = () => {
 
         callAPI();
     };
+
+    useTitle(" : 로그인");
 
     useEffect(()=>{
         const removeBlankId : string = userId.replace(/ /g,"");
