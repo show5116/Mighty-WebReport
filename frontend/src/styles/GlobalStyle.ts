@@ -10,6 +10,9 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: black;
   }
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', Pretendard, Roboto, 'Noto Sans KR', 'Segoe UI', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  }
 `;
 
 export default GlobalStyle;
