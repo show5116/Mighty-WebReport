@@ -2,7 +2,10 @@ plugins {
     id 'org.springframework.boot' version '2.6.7'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'com.moowork.node' version '1.3.1'
 }
+
+apply plugin: "com.moowork.node"
 
 group = 'com.ibs.mighty'
 version = '0.0.1-SNAPSHOT'
@@ -47,6 +50,22 @@ dependencies {
             "com.querydsl:querydsl-apt:5.0.0:jpa"
     )
 }
+
+def webappDir = "$projectDir/frontend"
+
+task appNpmInstall(type: NpmTask) {
+    workingDir = file("${webappDir}")
+    args = ["run", "build"]
+}
+
+task copyWebApp(type: Copy) {
+    from 'frontend/build'
+    into "build/resources/main/static"
+}
+
+copyWebApp.dependsOn(appNpmInstall)
+compileJava.dependsOn(copyWebApp)
+
 
 sourceSets {
     main {
