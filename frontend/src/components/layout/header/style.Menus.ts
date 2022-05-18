@@ -28,6 +28,8 @@ export const Container = styled.div`
       background: white;
       z-index: 10;
       border-top: 2px solid ${color.blue};
+      border-left: 2px solid ${color.lightgray};
+      border-right: 2px solid ${color.lightgray};
       border-bottom : 2px solid ${color.lightgray};
       padding: 15px 0;
       text-align: left;
