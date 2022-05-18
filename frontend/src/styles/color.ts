@@ -12,6 +12,9 @@ const color = {
     gray: '#999',
     white: '#fefefe',
     beige: '#FEE2C5',
+    yellow: '#FFd90f',
+    aquaBlue: '#26bfbf',
+    black: '#000000'
 }
 
 export default color;
