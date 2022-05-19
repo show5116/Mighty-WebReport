@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  &:hover{
+    opacity: 0.7;
+  }
   #dark-btn{
     display: none;
   }
@@ -34,7 +37,6 @@ export const Container = styled.div`
     z-index: 10;
     transition: transform .5s ease-in-out;
   }
-
   .sun{
     left: 2px;
   }
