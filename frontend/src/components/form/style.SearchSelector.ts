@@ -2,6 +2,8 @@ import styled from "styled-components";
 import color from "../../styles/color";
 
 export const Container = styled.div`
+  padding: 10px;
+  width: 230px;
   .header{
     font-size : 1.3rem;
     margin-bottom: 10px;
@@ -10,7 +12,7 @@ export const Container = styled.div`
     position: relative;
     margin-bottom: 50px;
     input{
-      padding-left: 20px;
+      padding: 0 20px;
       border: 2px solid ${color.lightgray};
       border-radius: 10px;
       width: 200px;
@@ -19,7 +21,7 @@ export const Container = styled.div`
     }
     .focus{
       border-radius: 10px 10px 0px 0px;
-      border-bottom: 1px solid ${color.lightgray};
+      border-bottom: 2px solid ${color.lightgray};
     }
     ul{
       display: flex;
@@ -48,20 +50,28 @@ export const Container = styled.div`
         background-color: ${color.lightgray};
       }
     }
-    svg{
+    .search{
       left: 4px;
-      top: 6px;
+      top: 8px;
+      position: absolute;
+    }
+    .delete-input{
+      cursor: pointer;
+      right: 20px;
+      top: 10px;
+      z-index: 1;
       position: absolute;
     }
   }
   .selected-list{
     border: 2px solid ${color.lightgray};
     border-radius: 10px;
-    padding: 10px;
     height: 100px;
+    width: 200px;
     overflow: auto;
     li{
       cursor: pointer;
+      padding: 2px 10px;
     }
     li.focus-item{
       background-color: ${color.lightgray};

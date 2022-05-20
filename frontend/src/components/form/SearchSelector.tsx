@@ -1,33 +1,101 @@
 import * as S from "./style.SearchSelector";
-import {ICheckBox} from "../../types/type";
-import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
+import {ISearchBox} from "../../types/type";
+import React, {useEffect, useState} from "react";
 import Icon from "../common/Icon";
+import {useSelector} from "react-redux";
+import {RootState} from "../../modules";
 
 interface IProps {
     title : string;
-    list : ICheckBox[];
-    selected : Set<String>;
-    selector : Dispatch<SetStateAction<Set<String>>>;
+    list : ISearchBox[];
+    selected : ISearchBox[];
+    selector :  React.Dispatch<React.SetStateAction<ISearchBox[]>>;
 }
 
 const SearchSelector = ({ title , list , selected, selector } : IProps) => {
 
     const [search,setSearch] = useState("");
-    const [searched,setSearched] = useState<ICheckBox[]>([]);
+    const [searched,setSearched] = useState<ISearchBox[]>([]);
     const [focus,setFocus] = useState(false);
     const [searchBoxFocusItem,setSearchBoxFocusItem] = useState(-1);
     const [resultBoxFocusItem,setResultBoxFocusItem] = useState(-1);
-
-    useEffect(()=>{
-        setSearched(list.filter(isSearched));
-    },[search])
+    const langState = useSelector((state:RootState) => state.menuReducer );
 
     const onChange = (event : React.ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value);
     }
 
-    const isSearched = (element : ICheckBox) => {
-        return !selected.has(element.text) && element.text.toUpperCase().includes(search.toUpperCase());
+    const onSelect = (event : React.MouseEvent<HTMLLIElement>) => {
+        if(event.currentTarget instanceof Element
+            && event.currentTarget.textContent !== null ){
+            select(event.currentTarget.id,
+                event.currentTarget.textContent);
+        }
+    }
+
+    const onDelete = (event : React.MouseEvent<HTMLLIElement>) => {
+        setResultBoxFocusItem(-1);
+        if(event.currentTarget instanceof Element){
+            selector(
+                selected.filter(value => value.id !== event.currentTarget.id)
+            );
+            setSearched(list.filter(isSearched));
+        }
+    }
+
+    const onFocus = () => {
+        setSearched(list.filter(isSearched));
+        if(list.filter(isSearched).length !== 0 ){
+            setFocus(true);
+        }
+    }
+
+    const onBlur = (event : React.FocusEvent<HTMLInputElement>) => {
+        setFocus(false);
+    }
+
+    const deleteInput = () => {
+        setSearch("");
+    }
+
+    const onKeyDown = (event : React.KeyboardEvent<HTMLInputElement>) => {
+        if(searched.length===0 || event.key === "Escape"){
+            setFocus(false);
+        }else if(event.key === "ArrowDown"){
+            event.preventDefault();
+            setSearchBoxFocusItem((prev)=>{
+                if(prev >= searched.length-1) {
+                    return 0;
+                }
+                return prev + 1;
+            });
+            setFocus(true);
+        }else if(event.key === "ArrowUp"){
+            event.preventDefault();
+            setSearchBoxFocusItem((prev)=>{
+                if(prev <= 0) {
+                    return searched.length-1;
+                }
+                return prev-1;
+            });
+            setFocus(true);
+        }else if(event.key === "Enter"){
+            if( searchBoxFocusItem === -1) {
+                select(searched[0].id,
+                    searched[0].text);
+            }else{
+                select(searched[searchBoxFocusItem].id,
+                    searched[searchBoxFocusItem].text);
+            }
+        } else{
+            setSearchBoxFocusItem(-1);
+            setFocus(true);
+        }
+    }
+
+    const isSearched = (element : ISearchBox) => {
+        return !selected.find((item) => item.id === element.id) &&
+            element.text.toUpperCase().includes(search.toUpperCase());
     }
 
     const textEffect = (text : string ) => {
@@ -54,81 +122,33 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
         return result;
     }
 
-    const onSelect = (event : React.MouseEvent<HTMLLIElement>) => {
-        if(event.currentTarget instanceof Element){
-            selector((prev) => {
-                // @ts-ignore
-                return new Set(prev.add(event.currentTarget.textContent))
-            });
-            setSearchBoxFocusItem(-1);
-            setSearched(list.filter(isSearched));
-        }
-    }
-
-    const onDelete = (event : React.MouseEvent<HTMLLIElement>) => {
-        setResultBoxFocusItem(-1);
-        if(event.currentTarget instanceof Element
-            && event.currentTarget.textContent!==null){
-            const item : string = event.currentTarget.textContent;
-            selector((prev) => {
-                prev.delete(item);
-                return new Set(prev)
-            });
-            setSearched(list.filter(isSearched));
-        }
-    }
-
-    const onFocus = () => {
-        if(searched.length===0){
-            setFocus(false);
-        }else{
-            setFocus(true);
-        }
-    }
-
-    const onBlur = (event : React.FocusEvent<HTMLInputElement>) => {
+    const select = ( id : string , text : string) => {
+        selector((prev) => {
+            return [...prev,
+                {
+                    id : id,
+                    text : text,
+                }]
+        });
+        setSearched(list.filter(isSearched));
+        setSearchBoxFocusItem(-1);
         setFocus(false);
     }
 
-    const onKeyDown = (event : React.KeyboardEvent<HTMLInputElement>) => {
-        if(searched.length===0 || event.key === "Escape"){
-            setFocus(false);
-        }else if(event.key === "ArrowDown"){
-            setSearchBoxFocusItem((prev)=>{
-                if(prev === searched.length-1) {
-                    return 0;
-                }
-                return prev + 1;
-            });
-            setFocus(true);
-        }else if(event.key === "ArrowUp"){
-            setSearchBoxFocusItem((prev)=>{
-                if(prev <= 0) {
-                    return searched.length-1;
-                }
-                return prev-1;
-            });
-            setFocus(true);
-        }else if(event.key === "Enter"){
-            selector((prev) => {
-                return new Set(prev.add(searched[searchBoxFocusItem].text))
-            });
-            setSearched(list.filter(isSearched));
-            setSearchBoxFocusItem(-1);
-            setFocus(false);
-        } else{
-            setSearchBoxFocusItem(-1);
-            setFocus(true);
-        }
-    }
 
-    const SearchIcon = () => (<Icon icon="search" size={15} />)
+
+    useEffect(()=>{
+        setSearched(list.filter(isSearched));
+    },[list,search,selected])
 
     useEffect(()=>{
         if(searched.length===0){
             setFocus(false);
         }
     },[searched])
+
+    const SearchIcon = () => (<Icon icon="search" size={15} className='search'/>)
+    const XIcon = () => (<Icon icon="x" size={10} className='delete-input' onClick={deleteInput}/>);
 
     return (
         <S.Container>
@@ -137,6 +157,7 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
             </div>
             <div className='search-box'>
                 <SearchIcon />
+                {search !== "" && (<XIcon />)}
                 <input
                     type="text"
                     value={search}
@@ -153,7 +174,7 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
                         (
                             <li
                                 id={element.id}
-                                key={element.id}
+                                key={element.text}
                                 dangerouslySetInnerHTML={{__html: textEffect(element.text)}}
                                 onMouseDown={onSelect}
                                 className={index===searchBoxFocusItem ? "focus-item" : undefined}
@@ -164,16 +185,22 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
                 </ul>)}
             </div>
             <ul className='selected-list'>
-                {Array.from(selected.values()).map((element:any,index)=>(
+                {selected.map((element,index)=>(
                     <li
-                        key={element}
+                        id={element.id}
+                        key={element.id}
                         onDoubleClick={onDelete}
                         onClick={()=>setResultBoxFocusItem(index)}
                         className={resultBoxFocusItem===index ? "focus-item" : undefined}
                     >
-                        {element}
+                        {element.text}
                     </li>
                 ))}
+                {selected.length !== 0 && (
+                    <li>
+                        {langState.isKor ? "전체삭제" : "Delete All"}
+                    </li>
+                )}
             </ul>
         </S.Container>
     );
