@@ -5,6 +5,11 @@ export interface Option {
     value?: string;
 };
 
+export interface ISearchBox {
+    text: string;
+    id: string;
+}
+
 export interface IAlert {
     show: boolean;
     header?: string;

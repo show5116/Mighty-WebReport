@@ -2,6 +2,11 @@ export interface IMemberTable {
 
 }
 
+export interface ICustomer {
+    customer : string;
+    customerName : string;
+}
+
 export interface IPlantTable {
     id : string;
     description? : string | null;
