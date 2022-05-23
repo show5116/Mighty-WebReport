@@ -10,4 +10,18 @@ const ApiUtil = axios.create({
     }
 });
 
+ApiUtil.interceptors.request.use(
+    function (config) {
+        if(config.headers !== undefined){
+            const token = localStorage.getItem('auth-token');
+            if(token===null || token === undefined){
+                config.headers.Authorization = "";
+            }else{
+                config.headers.Authorization = token;
+            }
+        }
+        return config;
+    }
+)
+
 export default ApiUtil;
