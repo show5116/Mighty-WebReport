@@ -5,6 +5,7 @@ import {RootState} from "../../../modules";
 import {Link} from "react-router-dom";
 import Menus from "./Menus";
 import Language from "./Language";
+import DarkToggle from "./DarkToggle";
 
 const Header = () => {
     const authState = useSelector((state:RootState) => state.authReducer);
@@ -24,6 +25,7 @@ const Header = () => {
                     ?
                     (<div className='nav-container'>
                         <div className='logout-container'>
+                            <DarkToggle />
                             <Language />
                             <LogoutBtn />
                         </div>

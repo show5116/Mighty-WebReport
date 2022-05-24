@@ -7,6 +7,18 @@ export interface ICustomer {
     customerName : string;
 }
 
+export interface IOperation {
+    operation : string;
+    description : string;
+    customer: string;
+}
+
+export interface IDevice {
+    deviceId : string;
+    description : string;
+    customer : string;
+}
+
 export interface IPlantTable {
     id : string;
     description? : string | null;

@@ -10,12 +10,14 @@ interface IProps {
     list : ISearchBox[];
     selected : ISearchBox[];
     selector :  React.Dispatch<React.SetStateAction<ISearchBox[]>>;
+    hasDesc? : boolean;
 }
 
-const SearchSelector = ({ title , list , selected, selector } : IProps) => {
+const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : IProps) => {
 
     const [search,setSearch] = useState("");
     const [searched,setSearched] = useState<ISearchBox[]>([]);
+    const [showText,setShowText] = useState(false);
     const [focus,setFocus] = useState(false);
     const [searchBoxFocusItem,setSearchBoxFocusItem] = useState(-1);
     const [resultBoxFocusItem,setResultBoxFocusItem] = useState(-1);
@@ -26,10 +28,9 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
     }
 
     const onSelect = (event : React.MouseEvent<HTMLLIElement>) => {
-        if(event.currentTarget instanceof Element
-            && event.currentTarget.textContent !== null ){
-            select(event.currentTarget.id,
-                event.currentTarget.textContent);
+        if(event.currentTarget instanceof Element){
+            const index : number = list.findIndex((element)=> element.id === event.currentTarget.id );
+            select(list[index].id, list[index].text);
         }
     }
 
@@ -94,8 +95,9 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
     }
 
     const isSearched = (element : ISearchBox) => {
-        return !selected.find((item) => item.id === element.id) &&
-            element.text.toUpperCase().includes(search.toUpperCase());
+        return !selected.find((item) => item.id === element.id) && (
+            showText ? element.id.toUpperCase().includes(search.toUpperCase())
+            : element.text.toUpperCase().includes(search.toUpperCase()));
     }
 
     const textEffect = (text : string ) => {
@@ -135,7 +137,9 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
         setFocus(false);
     }
 
-
+    const deleteAll = () => {
+        selector([]);
+    }
 
     useEffect(()=>{
         setSearched(list.filter(isSearched));
@@ -147,6 +151,11 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
         }
     },[searched])
 
+    useEffect(()=>{
+        selector([]);
+    },[list])
+
+    const ChangeIcon = () => (<Icon icon="change" size={20} className='change' onClick={()=>setShowText((prev)=>!prev)}/>)
     const SearchIcon = () => (<Icon icon="search" size={15} className='search'/>)
     const XIcon = () => (<Icon icon="x" size={10} className='delete-input' onClick={deleteInput}/>);
 
@@ -155,6 +164,14 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
             <div className='header'>
                 {title}
             </div>
+            {
+                hasDesc &&
+                (<div className='change-container'>
+                    <ChangeIcon />
+                    <span>{showText ? "name" : "desc"}</span>
+                </div>)
+            }
+
             <div className='search-box'>
                 <SearchIcon />
                 {search !== "" && (<XIcon />)}
@@ -174,8 +191,8 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
                         (
                             <li
                                 id={element.id}
-                                key={element.text}
-                                dangerouslySetInnerHTML={{__html: textEffect(element.text)}}
+                                key={element.id}
+                                dangerouslySetInnerHTML={showText ? {__html: textEffect(element.id)} : {__html: textEffect(element.text)} }
                                 onMouseDown={onSelect}
                                 className={index===searchBoxFocusItem ? "focus-item" : undefined}
                             >
@@ -193,11 +210,15 @@ const SearchSelector = ({ title , list , selected, selector } : IProps) => {
                         onClick={()=>setResultBoxFocusItem(index)}
                         className={resultBoxFocusItem===index ? "focus-item" : undefined}
                     >
-                        {element.text}
+                        {showText ? element.id : element.text}
                     </li>
                 ))}
                 {selected.length !== 0 && (
-                    <li>
+                    <li
+                        className={resultBoxFocusItem === selected.length ? "focus-item delete-all" : "delete-all"}
+                        onDoubleClick={deleteAll}
+                        onClick={()=>setResultBoxFocusItem(selected.length)}
+                    >
                         {langState.isKor ? "전체삭제" : "Delete All"}
                     </li>
                 )}

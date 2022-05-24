@@ -2,11 +2,35 @@ import styled from "styled-components";
 import color from "../../styles/color";
 
 export const Container = styled.div`
+  border: 1px solid ${color.lightgray};
+  resize: horizontal;
+  position: relative;
+  margin-right: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 10px;
-  width: 230px;
+  min-width: 230px;
   .header{
     font-size : 1.3rem;
     margin-bottom: 10px;
+  }
+  .change-container{
+    .change{
+      position: absolute;
+      cursor: pointer;
+      top: 6px;
+      right: 14px;
+    }
+    .change:hover{
+      opacity: 0.7;
+    }
+    span {
+      position: absolute;
+      width: 22px;
+      top: 24px;
+      right: 14px;
+      font-size: 3px;
+    }
   }
   .search-box{
     position: relative;
@@ -15,7 +39,7 @@ export const Container = styled.div`
       padding: 0 20px;
       border: 2px solid ${color.lightgray};
       border-radius: 10px;
-      width: 200px;
+      width: 100%;
       height: 30px;
       outline: 0;
     }
@@ -24,18 +48,23 @@ export const Container = styled.div`
       border-bottom: 2px solid ${color.lightgray};
     }
     ul{
-      display: flex;
-      flex-direction: column;
       background-color: white;
       position: absolute;
-      width: 200px;
+      width: 100%;
+      max-height: 170px;
+      overflow-y: auto;
       z-index: 1;
+      list-style-position:inside;
       border-left: 2px solid ${color.lightgray};
       border-right: 2px solid ${color.lightgray};
       border-bottom: 2px solid ${color.lightgray};
       border-radius: 0px 0px 10px 10px;
       justify-content: center;
       li{
+        width: 100%;
+        overflow-x: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         cursor: pointer;
         padding-left: 20px;
         height: 20px;
@@ -66,14 +95,25 @@ export const Container = styled.div`
   .selected-list{
     border: 2px solid ${color.lightgray};
     border-radius: 10px;
-    height: 100px;
-    width: 200px;
-    overflow: auto;
+    height: 150px;
+    width: 100%;
+    overflow-y: auto;
+    list-style-position:inside;
     li{
       cursor: pointer;
       padding: 2px 10px;
+      overflow-x: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
     li.focus-item{
+      background-color: ${color.lightgray};
+    }
+    li.delete-all{
+      color: red;
+      background-color: ${color.darkgray};
+    }
+    li.delete-all.focus-item{
       background-color: ${color.lightgray};
     }
   }

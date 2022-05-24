@@ -8,6 +8,7 @@ export interface Option {
 export interface ISearchBox {
     text: string;
     id: string;
+    condition?: string;
 }
 
 export interface IAlert {
