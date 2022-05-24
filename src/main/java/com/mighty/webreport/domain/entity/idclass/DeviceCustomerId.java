@@ -10,12 +10,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class OperationId implements Serializable {
-
-    @Column(name = "OPERATION")
-    private String operationId;
+public class DeviceCustomerId implements Serializable {
 
     @Column(name = "PLANT")
     private String plant;
 
+    @Column(name = "DEVICE")
+    private String device;
+
+    @Column(name = "CUSTOMER")
+    private String customer;
 }

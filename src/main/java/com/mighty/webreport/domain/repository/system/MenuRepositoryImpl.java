@@ -25,7 +25,6 @@ public class MenuRepositoryImpl implements MenuRepositoryCustom {
     public List<MenuResponse> getMenu(String plant) {
 
         String moduleId = "WEBREPORT";
-        String groupId = "SYS_COMMON";
 
         return jpaQueryFactory
                 .select(Projections.fields(MenuResponse.class,
@@ -55,8 +54,7 @@ public class MenuRepositoryImpl implements MenuRepositoryCustom {
                 .leftJoin(menuAction)
                 .on(menuStructure.actionSeq.eq(menuAction.actionSeq))
                 .where(menuStructure.plant.eq(plant)
-                .and(menuStructure.moduleId.eq(moduleId)
-                .and(menuStructure.groupId.eq(groupId))))
+                .and(menuStructure.moduleId.eq(moduleId)))
                 .orderBy(menuStructure.menuId.asc())
                 .fetch();
     }

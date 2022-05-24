@@ -38,10 +38,10 @@ public class PlantRepositoryImpl implements PlantRepositoryCustom{
 
         return jpaQueryFactory
                 .select(plant)
-                .from(plant, member, authorityRole)
-                .where(member.plant.eq(plant.id)
-                .and(authorityRole.plantId.eq(plant.id))
-                .and(plant.id.ne(sysplant))
+                .from(plant)
+                .innerJoin(member).on(member.plant.eq(plant.id))
+                .innerJoin(authorityRole).on(authorityRole.plantId.eq(plant.id))
+                .where(plant.id.ne(sysplant)
                 .and(plant.activePlant.eq('Y'))
                 .and(member.userId.eq(userId))
                 .and(member.role.eq(authorityRole.roleID)))

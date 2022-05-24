@@ -1,4 +1,4 @@
-package com.mighty.webreport.domain.repository.admin.member;
+package com.mighty.webreport.domain.repository.admin;
 
 import com.mighty.webreport.domain.entity.admin.Member;
 import com.mighty.webreport.domain.entity.idclass.MemberId;

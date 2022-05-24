@@ -50,7 +50,6 @@ public class MenuStructure {
     private String manuNameThree;
 
     @Column(name = "HAS_CHILD" , nullable = false)
-    @ColumnDefault("N")
     private Character hasChild;
 
     @Column(name = "PARENT_KEY")
@@ -69,15 +68,12 @@ public class MenuStructure {
     private String shortcutKey;
 
     @Column(name = "SEPERATE_BAR" , nullable = false)
-    @ColumnDefault("N")
     private Character seperateBar;
 
     @Column(name = "VISIBLE_FLAG" , nullable = false)
-    @ColumnDefault("Y")
     private Character visibleFlag;
 
     @Column(name = "ENABLE_FLAG" , nullable = false)
-    @ColumnDefault("Y")
     private Character enableFlag;
 
     @Column(name = "DESCRIPTION")

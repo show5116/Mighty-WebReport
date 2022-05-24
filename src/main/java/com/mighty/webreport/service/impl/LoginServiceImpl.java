@@ -1,7 +1,6 @@
 package com.mighty.webreport.service.impl;
 
 import com.mighty.webreport.domain.dto.AuthenticationDto;
-import com.mighty.webreport.domain.dto.JwtAuthenticationResponse;
 import com.mighty.webreport.domain.dto.MenuResponse;
 import com.mighty.webreport.domain.entity.admin.Member;
 import com.mighty.webreport.domain.entity.idclass.MenuGroupId;
@@ -9,12 +8,9 @@ import com.mighty.webreport.domain.entity.system.MenuGroup;
 import com.mighty.webreport.domain.repository.system.MenuGroupRepository;
 import com.mighty.webreport.domain.repository.system.MenuRepositoryCustom;
 import com.mighty.webreport.security.AccountContext;
-import com.mighty.webreport.security.AuthCode;
 import com.mighty.webreport.security.JwtAuthProvider;
 import com.mighty.webreport.service.LoginService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -71,7 +67,7 @@ public class LoginServiceImpl implements LoginService {
         }
 
         List<MenuResponse> menus = setMenuDepth(menuRepositoryCustom.getMenu(accountContext.getPlant()));
-        String jwt = provider.createToken(authentication);
+        String jwt = "Bearer " + provider.createToken(authentication);
 
         hashMap.put("isAuth",true);
         hashMap.put("menus",menus);
@@ -89,7 +85,6 @@ public class LoginServiceImpl implements LoginService {
                 newMenus.get(newMenus.size()-1).getChild().add(menus.get(i));
             }
         }
-
         return newMenus;
     }
 }
