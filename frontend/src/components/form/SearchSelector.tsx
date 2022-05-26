@@ -34,16 +34,6 @@ const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : 
         }
     }
 
-    const onDelete = (event : React.MouseEvent<HTMLLIElement>) => {
-        setResultBoxFocusItem(-1);
-        if(event.currentTarget instanceof Element){
-            selector(
-                selected.filter(value => value.id !== event.currentTarget.id)
-            );
-            setSearched(list.filter(isSearched));
-        }
-    }
-
     const onFocus = () => {
         setSearched(list.filter(isSearched));
         if(list.filter(isSearched).length !== 0 ){
@@ -137,7 +127,18 @@ const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : 
         setFocus(false);
     }
 
+    const onDelete = (event : React.MouseEvent<HTMLLIElement>) => {
+        setResultBoxFocusItem(-1);
+        if(event.currentTarget instanceof Element){
+            selector(
+                selected.filter(value => value.id !== event.currentTarget.id)
+            );
+            setSearched(list.filter(isSearched));
+        }
+    }
+
     const deleteAll = () => {
+        setResultBoxFocusItem(-1);
         selector([]);
     }
 
@@ -155,7 +156,7 @@ const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : 
         selector([]);
     },[list])
 
-    const ChangeIcon = () => (<Icon icon="change" size={20} className='change' onClick={()=>setShowText((prev)=>!prev)}/>)
+    const ChangeIcon = () => (<Icon icon="change" size={20} className='change'/>)
     const SearchIcon = () => (<Icon icon="search" size={15} className='search'/>)
     const XIcon = () => (<Icon icon="x" size={10} className='delete-input' onClick={deleteInput}/>);
 
@@ -166,7 +167,10 @@ const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : 
             </div>
             {
                 hasDesc &&
-                (<div className='change-container'>
+                (<div
+                    className='change-container'
+                    onClick={()=>setShowText((prev)=>!prev)}
+                >
                     <ChangeIcon />
                     <span>{showText ? "name" : "desc"}</span>
                 </div>)

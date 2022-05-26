@@ -6,7 +6,7 @@ export const Container = styled.div`
   border-bottom: 2px ${color.lightgray} solid;
   height: 80px;
   .header{
-    margin: auto 16.67% ;
+    margin: auto 8.33% ;
     display: flex;
     flex-direction: row;
     .nav-container{

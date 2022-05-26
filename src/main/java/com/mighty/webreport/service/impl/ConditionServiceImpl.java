@@ -10,6 +10,7 @@ import com.mighty.webreport.domain.repository.admin.device.DeviceRepositoryCusto
 import com.mighty.webreport.service.ConditionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class ConditionServiceImpl implements ConditionService {
     private final DeviceRepositoryCustom deviceRepositoryCustom;
 
     @Override
+    @Transactional(readOnly = true)
     public HashMap<String, Object> getCustomers(HashMap<String, Object> hashMap, String plant) {
         List<Customer> customers = customerRepository.findAllByPlant(plant);
         List<CustomerDto> customerDtoS = new ArrayList<>();
@@ -37,6 +39,7 @@ public class ConditionServiceImpl implements ConditionService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public HashMap<String, Object> getOperations(HashMap<String, Object> hashMap, String plant) {
         List<OperationResponse> operations = operationRepository.getOperationList(plant);
         hashMap.put("operations",operations);
@@ -44,6 +47,7 @@ public class ConditionServiceImpl implements ConditionService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public HashMap<String, Object> getDevices(HashMap<String, Object> hashMap, String plant) {
         List<DeviceResponse> devices = deviceRepositoryCustom.getDevice(plant);
         hashMap.put("devices",devices);

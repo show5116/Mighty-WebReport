@@ -25,6 +25,7 @@ const Icon = ({ icon , size , color , className , onClick }: IconProps) => {
                 stroke={IconSet[icon].stroke}
                 strokeLinecap={IconSet[icon].strokeLinecap}
                 strokeLinejoin={IconSet[icon].strokeLinejoin}
+                strokeMiterlimit={IconSet[icon].strokeMiterlimit}
                 strokeWidth={IconSet[icon].strokeWidth}
                 d={IconSet[icon].path}
                 transform={IconSet[icon].transform}

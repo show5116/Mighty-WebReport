@@ -6,10 +6,12 @@ export const Container = styled.div`
   resize: horizontal;
   position: relative;
   margin-right: 10px;
+  margin-bottom: 10px;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 10px;
   min-width: 230px;
+  border-radius: 10px;
   .header{
     font-size : 1.3rem;
     margin-bottom: 10px;
@@ -17,12 +19,8 @@ export const Container = styled.div`
   .change-container{
     .change{
       position: absolute;
-      cursor: pointer;
       top: 6px;
       right: 14px;
-    }
-    .change:hover{
-      opacity: 0.7;
     }
     span {
       position: absolute;
@@ -31,6 +29,9 @@ export const Container = styled.div`
       right: 14px;
       font-size: 3px;
     }
+  }
+  .change-container:hover{
+    cursor: pointer;
   }
   .search-box{
     position: relative;
