@@ -14,7 +14,10 @@ const color = {
     beige: '#FEE2C5',
     yellow: '#FFd90f',
     aquaBlue: '#26bfbf',
-    black: '#000000'
+    black: '#000000',
+    lavender: '#E6E6FA',
+    ghost: '#F8F8FF',
+    lightRed: '#ffb09c',
 }
 
 export default color;

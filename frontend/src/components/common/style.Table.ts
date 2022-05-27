@@ -8,6 +8,7 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
   table{
     display: grid;
     overflow: auto;
+    border: 1px solid ${color.lightgray};
     height: ${(props) => {
         if(props.isViewAll){
             return `650px`;
@@ -33,7 +34,8 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
     width: 100%;
     position: sticky;
     top: 0;
-    background-color: white;
+    color: ${color.white};
+    background-color: ${color.darkBlue};
     border: 1px solid black;
   }
 
@@ -41,9 +43,12 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
     
   }
   
+  table th{
+    height: 20px;
+  }
+  
   table th,
   table td {
-    height: 28px;
     font-size: 12px;
     text-align: left;
     padding: 4px 4px;
@@ -59,6 +64,14 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
 
   table tr td {
     border-top: 1px solid #ccc;
+  }
+  
+  table tbody tr:nth-child(2n-1) td{
+    background: ${color.ghost};
+  }
+
+  table tbody tr:nth-child(2n) td{
+    background: ${color.white};
   }
   
   & .resize-handle {
@@ -79,4 +92,9 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
   & .resize-handle.active {
     border-color: #517ea5;
   }
+
+  .td-operation{
+    background: ${color.lavender} !important;
+  }
+  
 `;
