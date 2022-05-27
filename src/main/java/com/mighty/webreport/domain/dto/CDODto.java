@@ -10,9 +10,9 @@ import java.util.List;
 @ToString
 public class CDODto {
 
-    private List<String> customers;
+    private List<IdTextDto> customers;
 
-    private List<String> operations;
+    private List<IdTextDto> operations;
 
-    private List<String> devices;
+    private List<IdTextDto> devices;
 }

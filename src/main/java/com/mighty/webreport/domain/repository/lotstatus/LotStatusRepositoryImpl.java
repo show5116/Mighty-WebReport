@@ -30,7 +30,7 @@ public class LotStatusRepositoryImpl implements LotStatusRepositoryCustom{
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<LotStatusResponse> getLotStatus(String plant, String[] customers, String[] operations, String[] devices) {
+    public List<LotStatusResponse> getLotStatus(String plant, List<String> customers, List<String> operations, List<String> devices) {
         return jpaQueryFactory
                 .select(Projections.fields(LotStatusResponse.class,
                         ExpressionUtils.as(
@@ -92,9 +92,11 @@ public class LotStatusRepositoryImpl implements LotStatusRepositoryCustom{
                 .leftJoin(equipmentLotStatus)
                 .on(lotStatus.plant.eq(equipmentLotStatus.plant)
                 .and(lotStatus.lotNumber.eq(equipmentLotStatus.lotNumber)))
-                .where(eqCustomers(customers), eqOperations(operations), eqDevices(devices)
-                .and(lotStatus.status.ne("99"))
-                .and(lotStatus.plant.eq(plant)))
+                .where(eqCustomers(customers),
+                        eqOperations(operations),
+                        eqDevices(devices),
+                        lotStatus.status.ne("99"),
+                        lotStatus.plant.eq(plant))
                 .orderBy(Expressions.stringPath("operation").asc(),
                         lotStatus.lotNumber.asc(),
                         lotStatus.mainLot.asc(),
@@ -103,24 +105,21 @@ public class LotStatusRepositoryImpl implements LotStatusRepositoryCustom{
                 .fetch();
     }
 
-    private BooleanExpression eqCustomers(String[] customers){
-        if(customers.length==0){
-            return null;
-        }
-        return lotStatus.customer.in(customers);
+    private BooleanExpression eqCustomers(List<String> customers){
+        return customers.isEmpty() ?
+                null :
+                lotStatus.customer.in(customers);
     }
 
-    private BooleanExpression eqOperations(String[] operations){
-        if(operations.length==0){
-            return null;
-        }
-        return lotStatus.operation.in(operations);
+    private BooleanExpression eqOperations(List<String> operations){
+        return operations.isEmpty() ?
+                null :
+                lotStatus.operation.in(operations);
     }
 
-    private BooleanExpression eqDevices(String[] devices){
-        if(devices.length==0){
-            return null;
-        }
-        return lotStatus.device.in(devices);
+    private BooleanExpression eqDevices(List<String> devices){
+        return devices.isEmpty() ?
+                null :
+                lotStatus.device.in(devices);
     }
 }

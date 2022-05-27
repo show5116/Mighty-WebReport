@@ -28,29 +28,26 @@ public class ConditionServiceImpl implements ConditionService {
 
     @Override
     @Transactional(readOnly = true)
-    public HashMap<String, Object> getCustomers(HashMap<String, Object> hashMap, String plant) {
+    public void getCustomers(HashMap<String, Object> hashMap, String plant) {
         List<Customer> customers = customerRepository.findAllByPlant(plant);
         List<CustomerDto> customerDtoS = new ArrayList<>();
         for(Customer customer : customers ) {
             customerDtoS.add(customer.toDTO());
         }
         hashMap.put("customers",customerDtoS);
-        return hashMap;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public HashMap<String, Object> getOperations(HashMap<String, Object> hashMap, String plant) {
+    public void getOperations(HashMap<String, Object> hashMap, String plant) {
         List<OperationResponse> operations = operationRepository.getOperationList(plant);
         hashMap.put("operations",operations);
-        return hashMap;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public HashMap<String, Object> getDevices(HashMap<String, Object> hashMap, String plant) {
+    public void getDevices(HashMap<String, Object> hashMap, String plant) {
         List<DeviceResponse> devices = deviceRepositoryCustom.getDevice(plant);
         hashMap.put("devices",devices);
-        return hashMap;
     }
 }

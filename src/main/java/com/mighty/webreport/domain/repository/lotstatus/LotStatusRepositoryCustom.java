@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface LotStatusRepositoryCustom {
 
-    public List<LotStatusResponse> getLotStatus(String plant , String[] customers, String[] operations, String[] devices);
+    public List<LotStatusResponse> getLotStatus(String plant , List<String> customers, List<String> operations, List<String> devices);
 }
