@@ -10,6 +10,15 @@ export const getDate = (dateString:string) => {
 }
 
 export const getMonthToMinute = (date:Date) => {
-    return `${(date.getMonth()+1).toString().padStart(2,'0')}/${(date.getDate()).toString().padStart(2,'0')}
-     ${date.getHours()}:${date.getMinutes()}`;
+    return `${padZero(date.getMonth()+1)}/${padZero(date.getDate())}
+     ${padZero(date.getHours())}:${padZero(date.getMinutes())}`;
+}
+
+export const getTodayString = () => {
+    const date = new Date();
+    return `${date.getFullYear()}${padZero(date.getMonth()+1)}${padZero(date.getDate())}${padZero(date.getHours())}${padZero(date.getMinutes())}`;
+}
+
+const padZero = (number:number) => {
+    return number.toString().padStart(2,'0');
 }

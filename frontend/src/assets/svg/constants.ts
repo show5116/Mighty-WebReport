@@ -1,7 +1,7 @@
 // 사용할 svg Icon
 export type iconName = "account" | "lock" | "logout" | "factory" |
     "sun" | "moon" | "search" | "x" | "change" | "caretDown" | "arrow" |
-    "expand" | "minimize" | "doubleUp" | "doubleDown";
+    "expand" | "minimize" | "doubleUp" | "doubleDown" | "excel";
 type TFillRule = "nonzero" | "evenodd" | "inherit";
 type TStrokeLineCap = "inherit" | "butt" | "round" | "square";
 type TStrokeLineJoin = "inherit" | "round" | "miter" | "bevel";
@@ -124,6 +124,12 @@ const IconSet: Record<iconName, icon> = {
         path : "M11.29,11.46a1,1,0,0,0,1.42,0l3-3A1,1,0,1,0,14.29,7L12,9.34,9.71,7A1,1,0,1,0,8.29,8.46Zm3,1.08L12,14.84l-2.29-2.3A1,1,0,0,0,8.29,14l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z",
         viewBox : "0 0 24 24"
     },
+    excel : {
+        path : "M23.5 2.5H14V1a.5.5 0 0 0-.612-.487l-13 3A.5.5 0 0 0 0 4v17a.5.5 0 0 0 .424.494l13 2A.499.499 0 0 0 14 23v-1.5h9.5a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zm-9.5 7h3v2h-3v-2zm-9.924 6.235l2.169-3.47a.497.497 0 0 0 0-.53l-2.168-3.47a.5.5 0 1 1 .847-.53l1.652" +
+            " 2.643c.183.292.665.292.848 0l1.652-2.643a.499.499 0 0 1 .689-.16.5.5 0 0 1 .16.689l-2.169 3.47a.497.497 0 0 0 0 .53l2.168 3.47a.5.5 0 0 1-.159.689.513.513 0 0 1-.689-.16L7.424 13.62a.502.502 0 0 0-.848.001l-1.652 2.643a.514.514 0 0 1-.689.16.5.5 0 0 " +
+            "1-.159-.689zM14 12.5h3v2h-3v-2zm4 0h5v2h-5v-2zm0-1v-2h5v2h-5zm0-3v-2h5v2h-5zm-1 0h-3v-2h3v2zm-3 7h3v2h-3v-2zm4 0h5v2h-5v-2zm5-10h-5v-2h5v2zm-6-2v2h-3v-2h3zm-3 15h3v2h-3v-2zm4 2v-2h5v2h-5z",
+        viewBox : "0 0 24 24",
+    }
 }
 
 export { IconSet };

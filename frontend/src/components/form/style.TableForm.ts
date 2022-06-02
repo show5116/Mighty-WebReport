@@ -13,6 +13,9 @@ export const Container = styled.div<{isViewAll:boolean}>`
   `}
   .btn-container{
     margin-left: auto;
+    .excel-btn{
+      margin-right: 10px;
+    }
     .search-btn{
       cursor: pointer;
       border: 0;

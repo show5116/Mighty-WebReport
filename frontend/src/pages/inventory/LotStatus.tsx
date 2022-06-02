@@ -7,7 +7,7 @@ import H2 from "../../components/common/H2";
 import SearchSelector from "../../components/form/SearchSelector";
 import ApiUtil from "../../utils/ApiUtil";
 import {ICustomer, IDevice, ILotStatus, IOperation } from "../../types/userData";
-import {ISearchBox, TableHeader} from "../../types/type";
+import {CSVHeader, ISearchBox, TableHeader} from "../../types/type";
 import TableForm from "../../components/form/TableForm";
 import Icon from "../../components/common/Icon";
 import {getDate, getMonthToMinute} from "../../utils/dateUtil";
@@ -55,8 +55,29 @@ const LotStatus = () => {
         {text:"출하 특성" , width: "10px"},
         {text:"라우트" , width: "90px"},
         {text:"입고시간" , width: "80px"},
-        //{text:"정체시간" , width: "10px"},
         {text:"장비" , width: "10px"},
+    ];
+
+    const CSVHeaders:CSVHeader[] = [
+        {label : "공정", key : "operation"},
+        {label : "LOT", key : "lotNumber"},
+        {label : "MAIN LOT", key : "mainLot"},
+        {label : "수량1", key : "qtyOne"},
+        {label : "단위", key : "qtyUnitOne"},
+        {label : "수량2", key : "qtyTwo"},
+        {label : "단위", key : "qtyUnitTwo"},
+        {label : "제품", key : "device"},
+        {label : "고객사", key : "customer"},
+        {label : "잠금", key : "inHold"},
+        {label : "재작업", key : "holdNote"},
+        {label : "HOLD 메모", key : "inRework"},
+        {label : "상태", key : "processFlag"},
+        {label : "제품 버전", key : "deviceVer"},
+        {label : "제품 특성", key : "deviceAttribute"},
+        {label : "출하 특성", key : "shipAttribute"},
+        {label : "라우트", key : "route"},
+        {label : "입고시간", key : "enterOperTime"},
+        {label : "장비", key : "equipmentId"},
     ];
 
     const onSubmit = (event : React.FormEvent<HTMLFormElement>) => {
@@ -69,7 +90,7 @@ const LotStatus = () => {
             }
             const res = await ApiUtil.post(
                 "/search/lot-status", params);
-            setSearchData(res.data);
+            setSearchData(res.data.lotStatus);
         }
         callAPI();
     }
@@ -92,7 +113,7 @@ const LotStatus = () => {
             res.data.operations.map((operation : IOperation) => {
                 return operations.push({
                     id: operation.operation,
-                    text : operation.description,
+                    text : `${operation.operation} : ${operation.description}`,
                     condition : operation.customer
                 })
             })
@@ -135,7 +156,7 @@ const LotStatus = () => {
                 element.operation !== undefined){
                 operation = element.operation;
                 operationNum++;
-                operationCol.push({
+                return operationCol.push({
                     colCount : 1,
                     colName : typeof element.operation=== "string" ? element.operation : "",
                     colQty1 : typeof element.qtyOne === "number" ? element.qtyOne : 0,
@@ -149,6 +170,7 @@ const LotStatus = () => {
                 if(typeof element.qtyTwo === "number" ){
                     operationCol[operationNum].colQty2 += element.qtyTwo;
                 }
+                return null;
             }
         });
 
@@ -166,6 +188,17 @@ const LotStatus = () => {
                 }
             );
             counter += operationCol[operationNum++].colCount + 1 ;
+            if(i === operationCol.length-1){
+                searchData.splice(0,0,{
+                    operation : "",
+                    qtyOne : qty1,
+                    qtyTwo : qty2,
+                    lotNumber : "total",
+                    colSpan : 0,
+                    isOperation : true,
+                })
+                break;
+            }
         }
 
         setTableBodies((
@@ -183,15 +216,20 @@ const LotStatus = () => {
                                     // @ts-ignore
                                     gridRow : `span ${element.colSpan+1}`
                                 }}
+                                className="td-operation"
                             >
                                 <span>{element.operation}</span>
                             </td>
                         )}
                         <td><span>{element.lotNumber}</span></td>
                         <td><span>{element.mainLot}</span></td>
-                        <td><span>{element.qtyOne}</span></td>
+                        <td
+                            style={{ textAlign : "right"}}
+                        ><span>{element.qtyOne}</span></td>
                         <td><span>{element.qtyUnitOne}</span></td>
-                        <td><span>{element.qtyTwo}</span></td>
+                        <td
+                            style={{ textAlign : "right"}}
+                        ><span>{element.qtyTwo}</span></td>
                         <td><span>{element.qtyUnitTwo}</span></td>
                         <td><span>{element.device}</span></td>
                         <td><span>{element.customer}</span></td>
@@ -235,20 +273,18 @@ const LotStatus = () => {
             })
         }else {
             operations.map((operation)=>{
-                if(!checkedCustomers.find((element)=> operation.condition===element.id)){
-                    return null;
-                }else if(!!operationsC.find((element)=>operation.id === element.id)){
+                if(!checkedCustomers.find((element)=> operation.condition===element.id)
+                    || !!operationsC.find((element)=>operation.id === element.id)){
                     return null;
                 }
-                else operationsC.push(operation);
+                return operationsC.push(operation);
             })
             devices.map((device)=>{
-                if(!checkedCustomers.find((element)=> device.condition===element.id)){
-                    return null;
-                }else if(!!devicesC.find((element)=>device.id === element.id)){
+                if(!checkedCustomers.find((element)=> device.condition===element.id
+                    || !!devicesC.find((element)=>device.id === element.id))){
                     return null;
                 }
-                else devicesC.push(device);
+                return devicesC.push(device);
             })
         }
         setOperationsC([...operationsC]);
@@ -279,7 +315,6 @@ const LotStatus = () => {
                         list={operationsC}
                         selected={checkedOperations}
                         selector={setCheckedOperations}
-                        hasDesc={true}
                     />
                     <SearchSelector
                         title={langState.isKor ? "제품" : "Device"}
@@ -290,11 +325,14 @@ const LotStatus = () => {
                     />
                 </div>
                 <TableForm
+                    name="LotStatus"
                     tableHeaders={tableHeaders}
                     tableBodies={tableBodies}
+                    CSVHeaders={CSVHeaders}
+                    CSVData={searchData}
                     isLookDown={isLookDown}
-                    isDatePicker={true}
                     isDateRange={true}
+                    isDatePicker={true}
                 />
             </form>
         </S.Container>

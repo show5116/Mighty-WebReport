@@ -49,7 +49,7 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
   
   table th,
   table td {
-    font-size: 12px;
+    font-size: 14px;
     text-align: left;
     padding: 4px 4px;
   }

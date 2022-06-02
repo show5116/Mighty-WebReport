@@ -1,6 +1,6 @@
 import * as S from "./style.SearchSelector";
 import {ISearchBox} from "../../types/type";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Icon from "../common/Icon";
 import {useSelector} from "react-redux";
 import {RootState} from "../../modules";
@@ -22,6 +22,9 @@ const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : 
     const [searchBoxFocusItem,setSearchBoxFocusItem] = useState(-1);
     const [resultBoxFocusItem,setResultBoxFocusItem] = useState(-1);
     const langState = useSelector((state:RootState) => state.menuReducer );
+
+    const searchedRef = useRef<HTMLUListElement>(null);
+
 
     const onChange = (event : React.ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value);
@@ -56,7 +59,14 @@ const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : 
             event.preventDefault();
             setSearchBoxFocusItem((prev)=>{
                 if(prev >= searched.length-1) {
+                    // @ts-ignore
+                    searchedRef.current.scrollTop = 0;
                     return 0;
+                }
+                if(searchedRef.current!==null &&
+                    (prev*20 - searchedRef.current.scrollTop >120 ||
+                    searchedRef.current.scrollTop - prev*20 >30)){
+                    searchedRef.current.scrollTop = prev*20-128;
                 }
                 return prev + 1;
             });
@@ -65,7 +75,14 @@ const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : 
             event.preventDefault();
             setSearchBoxFocusItem((prev)=>{
                 if(prev <= 0) {
+                    // @ts-ignore
+                    searchedRef.current.scrollTop = searchedRef.current.scrollHeight;
                     return searched.length-1;
+                }
+                if(searchedRef.current!==null &&
+                    (prev*20 - searchedRef.current.scrollTop >=160 ||
+                        searchedRef.current.scrollTop - prev*20 >=-10)){
+                    searchedRef.current.scrollTop = prev*20-20;
                 }
                 return prev-1;
             });
@@ -190,7 +207,9 @@ const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : 
                     className={focus ? "focus" : undefined}
                 />
                 {focus && (
-                <ul>
+                <ul
+                    ref={searchedRef}
+                >
                     {searched.map((element,index)=>
                         (
                             <li

@@ -35,8 +35,7 @@ const Table = ({ headers , bodies ,isViewAll , isLookDown }:IProps) => {
       setActiveIndex(index);
     };
 
-    const mouseMove = useCallback(
-        (event:any) => {
+    const mouseMove = useCallback((event:any) => {
             const gridColumns = columns.map((header,index) =>{
                 if(index === activeIndex){
                     // @ts-ignore
@@ -54,7 +53,7 @@ const Table = ({ headers , bodies ,isViewAll , isLookDown }:IProps) => {
                 " "
             )}`;
         }
-    ,[activeIndex,headers]);
+    ,[activeIndex,columns]);
 
     const removeListeners = useCallback(()=>{
         window.removeEventListener("mousemove",mouseMove);

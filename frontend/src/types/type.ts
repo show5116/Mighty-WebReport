@@ -10,6 +10,11 @@ export interface TableHeader {
     width: string;
 }
 
+export interface CSVHeader {
+    label: string;
+    key: string;
+}
+
 export interface ISearchBox {
     text: string;
     id: string;
