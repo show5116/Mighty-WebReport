@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div<{isViewAll:boolean}>`
-  height: 100%;
   overflow-y: auto;
   background-color: white;
   ${(props) => props.isViewAll && `
@@ -13,6 +12,11 @@ export const Container = styled.div<{isViewAll:boolean}>`
   `}
   .btn-container{
     margin-left: auto;
+    .look-down{
+      margin-bottom: -2px;
+      margin-right: 4px;
+      cursor: pointer;
+    }
     .excel-btn{
       margin-right: 10px;
     }

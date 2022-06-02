@@ -1,16 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div<{isLookDown:boolean}>`
-  height: calc( 100vh - 80px);
   width: 100%;
+  height: 100%;
   position: relative;
-  .look-down{
-    cursor: pointer;
-    position: absolute;
-    top: -4px;
-    right: 20px;
-  }
-  
   ${(props) => props.isLookDown 
       ? 
       `form{

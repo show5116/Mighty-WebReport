@@ -2,7 +2,7 @@ import * as S from './style.TableForm';
 import Table from "../common/Table";
 import {CSVHeader, TableHeader} from "../../types/type";
 import DatePickerForm from "./DatePickerForm";
-import React, {useState} from "react";
+import React, {SetStateAction, useState} from "react";
 import Icon from "../common/Icon";
 import { CSVLink } from "react-csv";
 import {ILotStatus} from "../../types/userData";
@@ -25,11 +25,12 @@ interface IProps {
     CSVHeaders : CSVHeader[];
     CSVData : ILotStatus[];
     isLookDown : boolean;
+    setIsLookDown : React.Dispatch<SetStateAction<boolean>>;
     isDatePicker? : boolean;
     isDateRange? : boolean;
 }
 
-const TableForm = ({ name , tableHeaders , tableBodies , CSVHeaders , CSVData , isLookDown , isDatePicker=false , isDateRange=false }:IProps) => {
+const TableForm = ({ name , tableHeaders , tableBodies , CSVHeaders , CSVData , isLookDown , setIsLookDown , isDatePicker=false , isDateRange=false }:IProps) => {
 
     const MENU_ID = "table-context-menu";
 
@@ -40,17 +41,6 @@ const TableForm = ({ name , tableHeaders , tableBodies , CSVHeaders , CSVData , 
 
     const onViewAll = () => {
         setIsViewAll((prev) => !prev);
-    }
-
-    const handleItemClick = ({
-         event,
-         props,
-         triggerEvent,
-         data} : ItemParams<ItemProps, any>) => {
-
-        switch (event.currentTarget.id) {
-
-        }
     }
 
     return (
@@ -79,6 +69,12 @@ const TableForm = ({ name , tableHeaders , tableBodies , CSVHeaders , CSVData , 
                     >
                         <Icon icon="search" size={24} />
                     </button>
+                    <Icon
+                        icon={isLookDown ? "doubleUp" : "doubleDown"}
+                        size={30}
+                        onClick={()=>setIsLookDown((prev) => !prev)}
+                        className="look-down"
+                    />
                     <Icon
                         icon={isViewAll ? "minimize" : "expand"}
                         size={26}

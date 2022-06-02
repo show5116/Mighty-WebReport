@@ -1,4 +1,7 @@
+import React from "react";
+
 export type CallbackFunction = () => void;
+export type MouseEventFunction = (event:React.MouseEvent) => void;
 
 export interface Option {
     text: string;

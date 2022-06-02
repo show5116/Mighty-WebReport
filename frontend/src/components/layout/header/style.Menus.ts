@@ -33,14 +33,6 @@ export const Container = styled.div`
       border-bottom : 2px solid ${color.lightgray};
       padding: 15px 0;
       text-align: left;
-      .menu-child{
-        padding: 10px 10px;
-        transition: 0.15s ease-in-out;
-      }
-      .menu-child:hover{
-        background: ${color.darkgray};
-        color: ${color.white};  
-      }
     }
   }
 `;

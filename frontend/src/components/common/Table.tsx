@@ -39,7 +39,7 @@ const Table = ({ headers , bodies ,isViewAll , isLookDown }:IProps) => {
             const gridColumns = columns.map((header,index) =>{
                 if(index === activeIndex){
                     // @ts-ignore
-                    const width = event.clientX - document.body.offsetWidth/12 - header.ref.current.offsetLeft;
+                    const width = event.clientX - 30 - header.ref.current.offsetLeft;
 
                     if(width >= minCellWidth){
                          return `minmax(${width}px,1fr)`;

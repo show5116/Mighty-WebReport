@@ -1,18 +1,18 @@
 import * as S from './style.Language';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../modules";
-import {setMenuEng, setMenuKor} from "../../../modules/action/menuAction";
+import {setLangEng, setLangKor} from "../../../modules/action/langAction";
 
 const Language = () => {
 
     const dispatch = useDispatch();
-    const langState = useSelector((state:RootState) => state.menuReducer);
+    const langState = useSelector((state:RootState) => state.langReducer);
 
     const onClick = () => {
         if(langState.isKor){
-            dispatch(setMenuEng());
+            dispatch(setLangEng());
         }else{
-            dispatch(setMenuKor());
+            dispatch(setLangKor());
         }
     }
 

@@ -3,18 +3,21 @@ import {persistReducer, persistStore} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import alertReducer from "./reducer/alertReducer";
 import authReducer from "./reducer/authReducer";
-import menuReducer from "./reducer/menuReducer";
+import langReducer from "./reducer/langReducer";
 import darkReducer from "./reducer/darkReducer";
+import tabMenuReducer from "./reducer/tabMenuReducer";
 
 const persistConfig = {
     key : "root",
-    storage : storage
+    storage : storage,
+    blacklist: ["tabMenuReducer"]
 }
 
 const rootReducer = combineReducers({
     alertReducer,
     authReducer,
-    menuReducer,
+    langReducer,
+    tabMenuReducer,
     darkReducer,
 });
 

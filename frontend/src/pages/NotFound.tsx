@@ -6,7 +6,7 @@ import image from "../assets/img/error-404.png";
 
 const NotFound = () => {
     const navigate = useNavigate();
-    const langState = useSelector((state:RootState) => state.menuReducer);
+    const langState = useSelector((state:RootState) => state.langReducer);
 
     const onClick = () => {
         navigate(-1);

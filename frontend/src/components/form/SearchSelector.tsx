@@ -21,7 +21,7 @@ const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : 
     const [focus,setFocus] = useState(false);
     const [searchBoxFocusItem,setSearchBoxFocusItem] = useState(-1);
     const [resultBoxFocusItem,setResultBoxFocusItem] = useState(-1);
-    const langState = useSelector((state:RootState) => state.menuReducer );
+    const langState = useSelector((state:RootState) => state.langReducer );
 
     const searchedRef = useRef<HTMLUListElement>(null);
 

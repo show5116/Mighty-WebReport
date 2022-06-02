@@ -2,14 +2,11 @@ import * as S from './style.LotStatus';
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "../../modules";
-import useTitle from "../../utils/UseHooks";
-import H2 from "../../components/common/H2";
 import SearchSelector from "../../components/form/SearchSelector";
 import ApiUtil from "../../utils/ApiUtil";
 import {ICustomer, IDevice, ILotStatus, IOperation } from "../../types/userData";
 import {CSVHeader, ISearchBox, TableHeader} from "../../types/type";
 import TableForm from "../../components/form/TableForm";
-import Icon from "../../components/common/Icon";
 import {getDate, getMonthToMinute} from "../../utils/dateUtil";
 
 interface OperationCol {
@@ -32,9 +29,7 @@ const LotStatus = () => {
     const [isLookDown,setIsLookDown] = useState(false);
     const [tableBodies, setTableBodies] = useState<JSX.Element>((<tbody></tbody>));
 
-    const langState = useSelector((state:RootState) => state.menuReducer);
-
-    useTitle(" : LOT 정보 조회");
+    const langState = useSelector((state:RootState) => state.langReducer);
 
     const tableHeaders:TableHeader[] = [
         {text:"공정" , width: "130px"},
@@ -295,13 +290,6 @@ const LotStatus = () => {
         <S.Container
             isLookDown={isLookDown}
         >
-            <H2 text={langState.isKor ? "LOT 정보 조회" : "View Lot Status" }/>
-            <Icon
-                icon={isLookDown ? "doubleUp" : "doubleDown"}
-                size={40}
-                onClick={()=>setIsLookDown((prev) => !prev)}
-                className="look-down"
-            />
             <form onSubmit={onSubmit}>
                 <div className='condition-container'>
                     <SearchSelector
@@ -331,6 +319,7 @@ const LotStatus = () => {
                     CSVHeaders={CSVHeaders}
                     CSVData={searchData}
                     isLookDown={isLookDown}
+                    setIsLookDown={setIsLookDown}
                     isDateRange={true}
                     isDatePicker={true}
                 />

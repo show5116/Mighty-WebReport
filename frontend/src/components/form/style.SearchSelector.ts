@@ -96,7 +96,7 @@ export const Container = styled.div`
   .selected-list{
     border: 2px solid ${color.lightgray};
     border-radius: 10px;
-    height: 150px;
+    height: 120px;
     width: 100%;
     overflow-y: auto;
     list-style-position:inside;

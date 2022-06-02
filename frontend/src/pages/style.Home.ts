@@ -3,7 +3,7 @@ import backGroundImg from "../assets/img/m_img_tami.jpg"
 
 export const Container = styled.div`
   min-width: 1000px;
-  min-height: 600px;
+  height: calc( 100vh - 80px);
   .home-container {
     padding: 266px 15px;
     margin: auto;
