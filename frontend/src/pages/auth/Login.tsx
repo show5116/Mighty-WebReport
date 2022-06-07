@@ -5,7 +5,7 @@ import Icon from "../../components/common/Icon";
 import color from "../../styles/color";
 import Select from "../../components/common/Select";
 import {useEffect, useState} from "react";
-import ApiUtil from "../../utils/ApiUtil";
+import {LoginUtil} from "../../utils/ApiUtil";
 import {Option} from "../../types/type";
 import {IPlantTable} from "../../types/userData";
 import {useDispatch} from "react-redux";
@@ -49,7 +49,7 @@ const Login = () => {
         };
 
         async function callAPI(){
-            await ApiUtil.post("/auth/signin", user)
+            await LoginUtil.post("/auth/signin", user)
                 .then((res)=>{
                     if(res.headers.code==="000"){
                         dispatch(showAlertModal('경고 메세지','비밀번호','가 틀렸습니다.',undefined));
@@ -80,7 +80,7 @@ const Login = () => {
             return
         }
         async function callAPI(){
-            const res = await ApiUtil.get(
+            const res = await LoginUtil.get(
                 "/auth/plant",
                 {
                     params : {
