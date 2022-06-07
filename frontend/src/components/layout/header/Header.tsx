@@ -14,12 +14,12 @@ const Header = () => {
         <S.Container>
             <div className='header'>
                 <div>
-                    <Link to="/">
+                    <a href="/">
                         <img
                             src={require("../../../assets/img/sub_logo_sawnics.jpg")}
                             alt="logo"
                         />
-                    </Link>
+                    </a>
                 </div>
                 {authState.isLogin
                     ?

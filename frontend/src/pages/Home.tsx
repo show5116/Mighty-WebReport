@@ -13,7 +13,7 @@ const Home = () => {
 
     useEffect(()=>{
         dispatch(initTabList());
-    },[])
+    },[dispatch])
 
     useTitle("");
 

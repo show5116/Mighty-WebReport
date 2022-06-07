@@ -6,6 +6,7 @@ export const Container = styled.div<{selected:boolean}>`
   padding: 10px;
   cursor: pointer;
   font-size: 14px;
+  user-select: none;
   border-right: 1px solid lightgray;
   background : ${(props) => props.selected 
       ? 

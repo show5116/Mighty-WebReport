@@ -10,8 +10,6 @@ import color from "../../styles/color";
 import {getTodayString} from "../../utils/dateUtil";
 import {
     Item,
-    ItemParams,
-    ItemProps,
     Menu,
     Separator,
     useContextMenu

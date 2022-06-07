@@ -1,9 +1,8 @@
 import * as S from './style.Menus';
 import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {RootState} from "../../../modules";
 import Menu from "./Menu";
-import {initTabList} from "../../../modules/action/tabMenuAction";
 
 const Menus = () => {
 

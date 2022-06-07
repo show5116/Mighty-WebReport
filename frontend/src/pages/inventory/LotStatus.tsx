@@ -1,6 +1,6 @@
 import * as S from './style.LotStatus';
 import React, {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../modules";
 import SearchSelector from "../../components/form/SearchSelector";
 import ApiUtil from "../../utils/ApiUtil";
@@ -8,6 +8,7 @@ import {ICustomer, IDevice, ILotStatus, IOperation } from "../../types/userData"
 import {CSVHeader, ISearchBox, TableHeader} from "../../types/type";
 import TableForm from "../../components/form/TableForm";
 import {getDate, getMonthToMinute} from "../../utils/dateUtil";
+import {showAlertModal} from "../../modules/action/alertAction";
 
 interface OperationCol {
     colCount: number;
@@ -21,14 +22,13 @@ const LotStatus = () => {
     const [customers, setCustomers] = useState<ISearchBox[]>([]);
     const [checkedOperations, setCheckedOperations] = useState<ISearchBox[]>([]);
     const [operations, setOperations] = useState<ISearchBox[]>([]);
-    const [operationsC, setOperationsC] = useState<ISearchBox[]>([]);
     const [checkedDevices, setCheckedDevices] = useState<ISearchBox[]>([]);
     const [devices, setDevices] = useState<ISearchBox[]>([]);
     const [devicesC, setDevicesC] = useState<ISearchBox[]>([]);
     const [searchData,setSearchData] = useState<ILotStatus[]>([]);
     const [isLookDown,setIsLookDown] = useState(false);
     const [tableBodies, setTableBodies] = useState<JSX.Element>((<tbody></tbody>));
-
+    const dispatch = useDispatch();
     const langState = useSelector((state:RootState) => state.langReducer);
 
     const tableHeaders:TableHeader[] = [
@@ -85,6 +85,9 @@ const LotStatus = () => {
             }
             const res = await ApiUtil.post(
                 "/search/lot-status", params);
+            if(res.data.lotStatus.length === 0){
+                dispatch(showAlertModal("확인 메세지","데이터","가 없습니다."));
+            }
             setSearchData(res.data.lotStatus);
         }
         callAPI();
@@ -108,8 +111,7 @@ const LotStatus = () => {
             res.data.operations.map((operation : IOperation) => {
                 return operations.push({
                     id: operation.operation,
-                    text : `${operation.operation} : ${operation.description}`,
-                    condition : operation.customer
+                    text : `${operation.operation} : ${operation.description}`
                 })
             })
             setOperations(operations);
@@ -251,15 +253,8 @@ const LotStatus = () => {
     },[searchData]);
 
     const changeCondition = () => {
-        operationsC.splice(0,operationsC.length);
         devicesC.splice(0,devicesC.length);
         if(checkedCustomers.length === 0){
-            operations.map((operation)=>{
-                if(!!operationsC.find((element)=>operation.id === element.id)){
-                    return null;
-                }
-                return operationsC.push(operation)
-            })
             devices.map((device)=>{
                 if(!!devicesC.find((element)=>device.id === element.id)){
                     return null;
@@ -267,13 +262,6 @@ const LotStatus = () => {
                 return devicesC.push(device);
             })
         }else {
-            operations.map((operation)=>{
-                if(!checkedCustomers.find((element)=> operation.condition===element.id)
-                    || !!operationsC.find((element)=>operation.id === element.id)){
-                    return null;
-                }
-                return operationsC.push(operation);
-            })
             devices.map((device)=>{
                 if(!checkedCustomers.find((element)=> device.condition===element.id
                     || !!devicesC.find((element)=>device.id === element.id))){
@@ -282,7 +270,6 @@ const LotStatus = () => {
                 return devicesC.push(device);
             })
         }
-        setOperationsC([...operationsC]);
         setDevicesC([...devicesC]);
     }
 
@@ -300,7 +287,7 @@ const LotStatus = () => {
                     />
                     <SearchSelector
                         title={langState.isKor ? "공정" : "Operation"}
-                        list={operationsC}
+                        list={operations}
                         selected={checkedOperations}
                         selector={setCheckedOperations}
                     />

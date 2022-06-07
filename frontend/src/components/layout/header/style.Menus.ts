@@ -5,6 +5,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   text-align: center;
+  user-select: none;
+  z-index: 20;
   .menu-parent{
     position: relative;
     width: 100px;
@@ -26,7 +28,7 @@ export const Container = styled.div`
       top: 46px;
       left: 0px;
       background: white;
-      z-index: 10;
+      z-index: 20;
       border-top: 2px solid ${color.blue};
       border-left: 2px solid ${color.lightgray};
       border-right: 2px solid ${color.lightgray};

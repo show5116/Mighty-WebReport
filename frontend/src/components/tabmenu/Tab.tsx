@@ -15,7 +15,8 @@ const Tab = ({selected , label , onClick}:IProps) => {
     const tabList = useSelector((state:RootState)=>state.tabMenuReducer);
     const dispatch = useDispatch();
 
-    const onDelete = () => {
+    const onDelete = (event:React.MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation();
         const index = tabList.findIndex((element)=>element.label === label);
         if(index !== -1) {
             tabList.splice(index,1);

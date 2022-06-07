@@ -21,7 +21,7 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
     grid-template-columns: ${(props) => (props.headers.map((header)=> {
         return `minmax(${header.width},1fr) `;   
     }))}; 
-    grid-template-rows: auto;
+    grid-template-rows: repeat(auto-fill, 20px);
   }
 
   table thead,
@@ -37,10 +37,6 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
     color: ${color.white};
     background-color: ${color.darkBlue};
     border: 1px solid black;
-  }
-
-  table tbody {
-    
   }
   
   table th{
@@ -63,7 +59,7 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
   }
 
   table tr td {
-    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
   }
   
   table tbody tr:nth-child(2n-1) td{

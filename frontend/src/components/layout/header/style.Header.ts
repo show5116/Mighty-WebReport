@@ -2,7 +2,10 @@ import styled from "styled-components";
 import color from "../../../styles/color";
 
 export const Container = styled.div`
-  z-index: 10;
+  z-index: 9999;
+  position: sticky;
+  top: 0;
+  background: ${color.white};
   border-bottom: 2px ${color.lightgray} solid;
   height: 80px;
   .header{

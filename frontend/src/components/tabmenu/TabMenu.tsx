@@ -2,12 +2,22 @@ import * as S from './style.TabMenu';
 import {useSelector} from "react-redux";
 import {RootState} from "../../modules";
 import Tab from "./Tab";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import TabContent from "./TabContent";
 
 const TabMenu = () => {
     const tabList = useSelector((state:RootState)=>state.tabMenuReducer);
     const [selectIndex,setSelectIndex] = useState(0);
+    const [tabLength,setTabLength] = useState(0);
+
+    useEffect(()=>{
+        if(selectIndex === tabList.length){
+            setSelectIndex(tabList.length-1);
+        }else if(tabLength < tabList.length){
+            setSelectIndex(tabList.length-1);
+        }
+        setTabLength(tabList.length);
+    },[tabList,selectIndex,tabLength]);
 
     return (
         <S.Container>
