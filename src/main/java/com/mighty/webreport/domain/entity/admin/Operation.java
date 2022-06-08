@@ -15,26 +15,18 @@ import javax.persistence.*;
                 targetClass = OperationResponse.class,
                 columns = {
                         @ColumnResult(name = "operation",type = String.class),
-                        @ColumnResult(name = "description",type = String.class),
-                        @ColumnResult(name = "customer",type = String.class)
+                        @ColumnResult(name = "description",type = String.class)
                 }
         )
 )
 @NamedNativeQuery(
         name = "getOperationList",
         query = " select distinct a.operation, " +
-                " a.short_desc as description," +
-                "        c.customer" +
+                " a.short_desc as description " +
                 "   from adm_operation a," +
-                "        adm_route_operation b," +
-                "        (select distinct customer" +
-                "              , route" +
-                "           from asfc_lot_status" +
-                "          where plant = :plant" +
-                "        ) c" +
+                "        adm_route_operation b " +
                 "  where a.plant = :plant" +
                 "    and a.plant = b.plant" +
-                "    and b.route = c.route" +
                 "    and a.operation = b.operation" +
                 "  order by decode(substr(a.operation, 0, 1), 'F', 0, 1), a.operation",
         resultSetMapping = "OperationWithCustomersMapping")

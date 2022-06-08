@@ -10,6 +10,4 @@ public class OperationResponse {
     private String operation;
 
     private String description;
-
-    private String customer;
 }
