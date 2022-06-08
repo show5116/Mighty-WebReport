@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../modules";
 import {useEffect} from "react";
 import NotFound from "../pages/NotFound";
+import {setLogOut} from "../modules/action/authAction";
 
 const Routing = () => {
 
@@ -14,10 +15,14 @@ const Routing = () => {
     const navigate = useNavigate();
 
     useEffect(()=>{
-        if(!authState.isLogin) {
-            navigate("/login");
+        if(window.location.pathname !== "/login" &&
+            (!authState.isLogin ||
+            localStorage.getItem("auth-token")===null ||
+            localStorage.getItem("auth-token")===undefined)) {
+            dispatch(setLogOut());
+            navigate("/login?error=token-error");
         }
-    },[dispatch,navigate,authState.isLogin])
+    },[dispatch,navigate,authState.isLogin]);
 
 
     return (

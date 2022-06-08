@@ -22,7 +22,6 @@ const Login = () => {
     const [plant,setPlant] = useState("");
     const [plants,setPlants] = useState<Array<Option>>([{text: "PLANT", value: "NotC"}]);
 
-
     const onChangeId = (event : React.ChangeEvent<HTMLInputElement>) => {
         const regExp = /[{}[\]/?.,;:|)*~`!^\\-_+┼<>@#$%&'"(=]/gi;
         if(regExp.test(event.target.value)){
@@ -114,6 +113,15 @@ const Login = () => {
         }
         setPlant(plants[0].text);
     },[plants])
+
+    useEffect(()=>{
+        const URLSearch = new URLSearchParams(window.location.search);
+        const error:string|null = URLSearch.get("error");
+        if(error==="token-error"){
+            dispatch(showAlertModal("경고 메세지","인증","이 만료되었습니다."));
+        }
+
+    },[]);
 
     const svgSize : number = 20;
     const svgColor = color.gray;

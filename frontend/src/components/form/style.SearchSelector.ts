@@ -111,11 +111,8 @@ export const Container = styled.div`
       background-color: ${color.lightgray};
     }
     li.delete-all{
-      color: red;
-      background-color: ${color.darkgray};
-    }
-    li.delete-all.focus-item{
-      background-color: ${color.lightgray};
+      text-align: center;
+      color: #ea3847;
     }
   }
 `;

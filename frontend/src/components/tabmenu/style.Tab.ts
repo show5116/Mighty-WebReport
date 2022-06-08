@@ -14,8 +14,16 @@ export const Container = styled.div<{selected:boolean}>`
       :
           `linear-gradient(to bottom,#ffffff 0%,#e6e6e6 100%) #ffffff`
   };
-  ${(props) => props.selected && 
-    `border-top: 3px solid blue;`
+  ${(props) => props.selected ?
+    `border-top: 3px solid blue;` : 
+      `min-width: 50px;`
+  }
+  .tab-label{
+    white-space: nowrap;
+    ${(props) => !props.selected &&
+        `overflow-x: hidden;
+        text-overflow: ellipsis;`
+    }
   }
   .tab-delete{
     margin-left: 2px;

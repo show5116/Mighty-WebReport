@@ -236,7 +236,7 @@ const SearchSelector = ({ title , list , selected, selector, hasDesc = false} : 
                         {showText ? element.id : element.text}
                     </li>
                 ))}
-                {selected.length !== 0 && (
+                {selected.length > 1 && (
                     <li
                         className={resultBoxFocusItem === selected.length ? "focus-item delete-all" : "delete-all"}
                         onDoubleClick={deleteAll}

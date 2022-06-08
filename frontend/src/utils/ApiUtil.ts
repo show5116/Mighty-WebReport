@@ -25,8 +25,7 @@ ApiUtil.interceptors.request.use(
         if(config.headers !== undefined){
             const token = localStorage.getItem('auth-token');
             if(token===null || token === undefined){
-                // 여기선 토큰이 사라진거
-                // 강제 login 페이지로 리다이렉트
+                window.location.href="/login?error=token-error";
                 config.headers.Authorization = "";
             }else{
                 config.headers.Authorization = token;
@@ -38,23 +37,25 @@ ApiUtil.interceptors.request.use(
 
 ApiUtil.interceptors.response.use(
   function (response){
-      if(response.headers.code === "000"){
-          window.location.href="/login";
-      }else if(response.headers.code === "001"){
-          window.location.href="/login";
-      }else if(response.headers.code === "002"){
-          window.location.href="/login";
-      }else if(response.headers.code === "003"){
-          window.location.href="/login";
-      }else if(response.headers.code === "004"){
-          window.location.href="/login";
-      }else if(response.headers.code === "005"){
-          window.location.href="/login";
-      }else if(response.headers.code === "006"){
-          window.location.href="/login";
-      }else if(response.headers.code === "010"){
-          window.location.href="/login";
+      const errorCode : string = response.headers.code;
+      if(errorCode === "000" ||
+          errorCode === "001" ||
+          errorCode === "002" ||
+          errorCode === "003" ||
+          errorCode === "004"){
+          // auth-token 에러
+          const token = localStorage.getItem('auth-token');
+          if(token!==null && token !== undefined){
+              localStorage.removeItem("auth-token")
+          }
+          window.location.href="/login?error=token-error";
+      }else if(errorCode === "005" ||
+          errorCode === "006" ||
+          errorCode === "010") {
+          // authorized 에러
+          window.location.href = "/";
       }
+      return response;
   }
 );
 
