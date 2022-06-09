@@ -10,11 +10,12 @@ import PTESTYield from "../../../pages/yield/PTESTYield";
 import FinalPTESTYield from "../../../pages/yield/FinalPTESTYield";
 import MonthlySalesPerformance from "../../../pages/sales/MonthlySalesPerformance";
 import {setTabList} from "../../../modules/action/tabMenuAction";
+import ViewDefectStatus from "../../../pages/inventory/ViewDefectStatus";
 
 type menuName = string | "Daily Movement" | "Operation Movement Monitoring" |
     "Daily Shipping Status" | "Fab Out Status By Device" | "View LOT Status" |
     "AVI Yield Report" | "PTEST Yield Report" | "Final PTEST Yield Report" |
-    "Current Month Sales Status" |
+    "Current Month Sales Status" | "View Defect Status" |
     "TEST";
 
 const MenuSet: Record<menuName, ITab> = {
@@ -27,6 +28,11 @@ const MenuSet: Record<menuName, ITab> = {
         label : "View LOT Status",
         labelKor : "LOT 정보 조회",
         children : <LotStatus />
+    },
+    "View Defect Status" : {
+        label : "View Defect Status",
+        labelKor : "불량현황 조회",
+        children : <ViewDefectStatus />
     },
     "Operation Movement Monitoring" : {
         label : "Operation Movement Monitoring",

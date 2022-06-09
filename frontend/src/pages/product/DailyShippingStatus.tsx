@@ -1,10 +1,10 @@
 import * as S from './style.DailyShippingStatus';
-import {useSelector} from "react-redux";
-import {RootState} from "../../modules";
+//import {useSelector} from "react-redux";
+//import {RootState} from "../../modules";
 
 const DailyShippingStatus = () => {
 
-    const langState = useSelector((state:RootState) => state.langReducer);
+    //const langState = useSelector((state:RootState) => state.langReducer);
 
     const onSubmit = (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

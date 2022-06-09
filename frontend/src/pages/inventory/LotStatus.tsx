@@ -17,6 +17,51 @@ interface OperationCol {
     colQty2: number;
 }
 
+
+const tableHeaders:TableHeader[] = [
+    {text:"공정" , width: "130px"},
+    {text:"LOT" , width: "130px"},
+    {text:"Main Lot" , width: "80px"},
+    {text:"수량1" , width: "44px"},
+    {text:"단위" , width: "40px"},
+    {text:"수량2" , width: "44px"},
+    {text:"단위" , width: "40px"},
+    {text:"제품" , width: "70px"},
+    {text:"고객사" , width: "80px"},
+    {text:"잠금" , width: "34px"},
+    {text:"재작업" , width: "48px"},
+    {text:"HOLD 메모" , width: "10px"},
+    {text:"상태" , width: "40px"},
+    {text:"제품 버전" , width: "10px"},
+    {text:"제품 특성" , width: "10px"},
+    {text:"출하 특성" , width: "10px"},
+    {text:"라우트" , width: "90px"},
+    {text:"입고시간" , width: "80px"},
+    {text:"장비" , width: "10px"},
+];
+
+const CSVHeaders:CSVHeader[] = [
+    {label : "공정", key : "operation"},
+    {label : "LOT", key : "lotNumber"},
+    {label : "MAIN LOT", key : "mainLot"},
+    {label : "수량1", key : "qtyOne"},
+    {label : "단위", key : "qtyUnitOne"},
+    {label : "수량2", key : "qtyTwo"},
+    {label : "단위", key : "qtyUnitTwo"},
+    {label : "제품", key : "device"},
+    {label : "고객사", key : "customer"},
+    {label : "잠금", key : "inHold"},
+    {label : "재작업", key : "holdNote"},
+    {label : "HOLD 메모", key : "inRework"},
+    {label : "상태", key : "processFlag"},
+    {label : "제품 버전", key : "deviceVer"},
+    {label : "제품 특성", key : "deviceAttribute"},
+    {label : "출하 특성", key : "shipAttribute"},
+    {label : "라우트", key : "route"},
+    {label : "입고시간", key : "enterOperTime"},
+    {label : "장비", key : "equipmentId"},
+];
+
 const LotStatus = () => {
     const [checkedCustomers, setCheckedCustomers] = useState<ISearchBox[]>([]);
     const [customers, setCustomers] = useState<ISearchBox[]>([]);
@@ -30,50 +75,6 @@ const LotStatus = () => {
     const [tableBodies, setTableBodies] = useState<JSX.Element>((<tbody></tbody>));
     const dispatch = useDispatch();
     const langState = useSelector((state:RootState) => state.langReducer);
-
-    const tableHeaders:TableHeader[] = [
-        {text:"공정" , width: "130px"},
-        {text:"LOT" , width: "130px"},
-        {text:"Main Lot" , width: "80px"},
-        {text:"수량1" , width: "44px"},
-        {text:"단위" , width: "40px"},
-        {text:"수량2" , width: "44px"},
-        {text:"단위" , width: "40px"},
-        {text:"제품" , width: "70px"},
-        {text:"고객사" , width: "80px"},
-        {text:"잠금" , width: "34px"},
-        {text:"재작업" , width: "48px"},
-        {text:"HOLD 메모" , width: "10px"},
-        {text:"상태" , width: "40px"},
-        {text:"제품 버전" , width: "10px"},
-        {text:"제품 특성" , width: "10px"},
-        {text:"출하 특성" , width: "10px"},
-        {text:"라우트" , width: "90px"},
-        {text:"입고시간" , width: "80px"},
-        {text:"장비" , width: "10px"},
-    ];
-
-    const CSVHeaders:CSVHeader[] = [
-        {label : "공정", key : "operation"},
-        {label : "LOT", key : "lotNumber"},
-        {label : "MAIN LOT", key : "mainLot"},
-        {label : "수량1", key : "qtyOne"},
-        {label : "단위", key : "qtyUnitOne"},
-        {label : "수량2", key : "qtyTwo"},
-        {label : "단위", key : "qtyUnitTwo"},
-        {label : "제품", key : "device"},
-        {label : "고객사", key : "customer"},
-        {label : "잠금", key : "inHold"},
-        {label : "재작업", key : "holdNote"},
-        {label : "HOLD 메모", key : "inRework"},
-        {label : "상태", key : "processFlag"},
-        {label : "제품 버전", key : "deviceVer"},
-        {label : "제품 특성", key : "deviceAttribute"},
-        {label : "출하 특성", key : "shipAttribute"},
-        {label : "라우트", key : "route"},
-        {label : "입고시간", key : "enterOperTime"},
-        {label : "장비", key : "equipmentId"},
-    ];
 
     const onSubmit = (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -307,8 +308,6 @@ const LotStatus = () => {
                     CSVData={searchData}
                     isLookDown={isLookDown}
                     setIsLookDown={setIsLookDown}
-                    isDateRange={true}
-                    isDatePicker={true}
                 />
             </form>
         </S.Container>
