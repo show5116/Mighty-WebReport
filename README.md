@@ -1,28 +1,28 @@
-## MIGHTY WebReport Project
+<h1>MIGHTY WebReport Project</h1>
 
-## Index
+<h2>Index</h2>
 
-- [Getting Started](#Getting Started)
-  * [개발환경](#개발환경)
-  * [개발 가이드](#개발 가이드)
-  * [DataBase](#DataBase)
-- [Description](#Description)
-  * [Project Period](#Project Period)
-  * [Project Purpose](#Project Purpose)
-  * [Project Architecture](#Project Architecture)
-- [Skill](#Skill)
-- [Run](#Run)
-  * [프로젝트 실행](#프로젝트 실행)
-  * [React Live Server](#React Live Server)
-- [Deploy](#Deploy)
-  * [Intellij Ultimate jar 배포](#Intellij Ultimate jar 배포)
-  * [cmd jar 배포](#cmd jar 배포)
-  * [jar 파일 실행](#jar 파일 실행)
-- [Developer Contact](#Developer Contact)
+- <a href="#gettingStarted">Getting Started</a>
+  * <a href="#개발환경">개발환경</a>
+  * <a href="#개발가이드">개발 가이드</a>
+  * <a href="#dataBase">DataBase</a>
+- <a href="#description">Description</a>
+  * <a href="#projectPeriod">Project Period</a>
+  * <a href="#projectPurpose">Project Purpose</a>
+  * <a href="#projectArchitecture">Project Architecture</a>
+- <a href="#skill">Skill</a>
+- <a href="#run">Run</a>
+  * <a href="#프로젝트설명">프로젝트 실행</a>
+  * <a href="#reactLiveServer">React Live Server</a>
+- <a href="#deploy">Deploy</a>
+  * <a href="#intellijUltimateJar배포">Intellij Ultimate jar 배포</a>
+  * <a href="#cmdJar배포">cmd jar 배포</a>
+  * <a href="#jar파일실행">jar 파일 실행</a>
+- <a href="#developerContact">Developer Contact</a>
 
-## Getting Started
+<h2 id="gettingStarted">Getting Started</h2>
 
-### 개발환경
+<h3 id="개발환경">개발환경</h3>
 
 - 추천IDE - <a href="https://www.jetbrains.com/ko-kr/idea/download/#section=windows">인텔리제이</a>
 
@@ -47,12 +47,12 @@ React 개발을 위해선 nodejs를 설치해야만 합니다. cmd를 키고 아
 버전이 나온다면 넘어가시고, <br/>
 찾을수 없는 명령어라고 나온다면 위의 링크를 통해 LTS 버전을 다운로드 받아주세요.
 
-### 개발 가이드
+<h3 id="개발가이드">개발 가이드</h3>
 
 - Front-End는 frontend 디렉토리의 README.md 참고
 - Back-End는 src/main/java/com/mighty/webreport 디렉토리의 README.md 참고
 
-### DataBase
+<h3 id="dataBase">DataBase</h3>
 
 - /src/main/resources 디렉토리에 security.properties 파일 생성
 ```properties
@@ -70,12 +70,12 @@ jwt.expireMs는 로그인 유지시간으로 <br/>
 위의 예시는 10일동안 로그인이 유지되는 토큰을 발급해줍니다.<br/>
 
 
-## Description
+<h2 id="description">Description</h2>
 
-### Project Period
+<h3 id="projectPeriod">Project Period</h3>
 2022.05.09(월) ~ 2022.06.17(금) (약 5주간)
 
-### Project Purpose
+<h3 id="projectPurpose">Project Purpose</h3>
 기존의 Web Report 보다 사용자 친화적, 속도향상, 보안강화를 목적에 두고 있습니다.
 
 1. 보안강화 :  기존의 사이트는 비밀번호를 사용자(client)단에서 encode 하여 서버에 보내줍니다. 이 과정에서 xss가 일어날 가능성이 있고, 또한 web secure가 되어있지 않아 csrf 요청에도 취약합니다. 이러한 점을 csrf에는 완전 안전, xss에는 보다 안전한 방식으로 업그레이드 합니다.
@@ -87,36 +87,41 @@ jwt.expireMs는 로그인 유지시간으로 <br/>
 3. UI/UX 업그레이드 : SPA(Single Page Aplication) 방식으로 핸드폰 어플리케이션과 같이 깜빡임이 존재하지 않고, 페이지가 좀더 부드러워 집니다.
    거기에 더해 페이지 전반적으로 사용하기 편하게 업그레이드 합니다.
 
-### Project Architecture
+<h3 id="projectArchitecture">Project Architecture</h3>
 
-## Skill
+<h2 id="skill">Skill</h2>
 
-### Front-End
+<h3>Front-End</h3>
+<div>
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the badge&logo=React&logoColor=000000"/>
 <img src="https://img.shields.io/badge/ReactRouter6-CA4245?style=for-the badge&logo=ReactRouter&logoColor=FFFFFF"/>
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the badge&logo=TypeScript&logoColor=FFFFFF"/>
 <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the badge&logo=Redux&logoColor=FFFFFF"/>
 <img src="https://img.shields.io/badge/ReduxSaga-999999?style=for-the badge&logo=ReduxSaga&logoColor=FFFFFF"/>
 <img src="https://img.shields.io/badge/styledComponents-DB7093?style=for-the badge&logo=styledComponents&logoColor=FFFFFF"/>
+</div>
 
-### Back-End
+<h3>Back-End</h3>
+<div>
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the badge&logo=SpringBoot&logoColor=FFFFFF"/>
 <img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=for-the badge&logo=SpringSecurity&logoColor=FFFFFF"/>
 <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the badge&logo=Gradle&logoColor=FFFFFF"/>
 <img src="https://img.shields.io/badge/JPAHibernate-59666C?style=for-the badge&logo=Hibernate&logoColor=FFFFFF"/>
+</div>
 
-### DataBase
+<h3>DataBase</h3>
+<div>
 <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the badge&logo=Oracle&logoColor=FFFFFF"/>
+</div>
 
+<h2 id="run">Run</h2>
 
-## Run
-
-### 프로젝트 실행
+<h3 id="프로젝트실행">프로젝트 실행</h3>
 - gradle.build 빌드
 - 프로젝트 빌드
 - /src/main/java/com/mighty/webreport의 MightyWebreportApplication 파일 실행
 
-### React Live Server
+<h3 id="reactLiveServer">React Live Server</h3>
 터미널에서 아래 커맨드 입력
 ```
     $ cd /frontend
@@ -124,14 +129,14 @@ jwt.expireMs는 로그인 유지시간으로 <br/>
     $ npm start
 ```
 
-## Deploy
+<h2 id="deploy">Deploy</h2>
 
-### Intellij Ultimate jar 배포
+<h3 id="intellijUltimateJar배포">Intellij Ultimate jar 배포</h3>
 배포를 하는방법은 Intellij Ultimate IDE를 기준으로는 우측의 gradle 버튼에서<br />
 build bootJar로 빌드하거나 (이미지 참조)<br/>
 <img src="./src/main/resources/readme/bootjar.jpg" /><br/>
 
-### cmd jar 배포
+<h3 id="cmdJar배포">cmd jar 배포</h3>
 터미널에서 프로젝트 루트위치로 가서 아래 커맨드 입력
 ```
     $ gradlew bootJar
@@ -140,7 +145,7 @@ build bootJar로 빌드하거나 (이미지 참조)<br/>
 그 후 /build/libs 디렉토리에 .jar 파일이 생성된다.<br/>
 이파일을 배포시키면 완료
 
-### jar 파일 실행
+<h3 id="jar파일실행">jar 파일 실행</h3>
 
 - CLI 실행 (Logger 실시간 확인, 및 debug 용)
 ```
@@ -156,7 +161,7 @@ build bootJar로 빌드하거나 (이미지 참조)<br/>
     $ taskkill /f /im java.exe
 ```
 
-## Developer Contact
+<h2 id="developerContact">Developer Contact</h2>
 - 이메일 링크 : <yyj161091@gmail.com>
 - github 링크 : <https://github.com/show5116>
 - 핸드폰 : 010-5116-1830
