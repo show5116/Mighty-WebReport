@@ -12,7 +12,7 @@
   * <a href="#projectArchitecture">Project Architecture</a>
 - <a href="#skill">Skill</a>
 - <a href="#run">Run</a>
-  * <a href="#프로젝트설명">프로젝트 실행</a>
+  * <a href="#프로젝트실행">프로젝트 실행</a>
   * <a href="#reactLiveServer">React Live Server</a>
 - <a href="#deploy">Deploy</a>
   * <a href="#intellijUltimateJar배포">Intellij Ultimate jar 배포</a>
@@ -162,6 +162,9 @@ build bootJar로 빌드하거나 (이미지 참조)<br/>
 ```
 
 <h2 id="developerContact">Developer Contact</h2>
+
 - 이메일 링크 : <yyj161091@gmail.com>
+
 - github 링크 : <https://github.com/show5116>
+
 - 핸드폰 : 010-5116-1830
