@@ -49,8 +49,8 @@ React 개발을 위해선 nodejs를 설치해야만 합니다. cmd를 키고 아
 
 <h3 id="개발가이드">개발 가이드</h3>
 
-- Front-End는 frontend 디렉토리의 README.md 참고
-- Back-End는 src/main/java/com/mighty/webreport 디렉토리의 README.md 참고
+- Front-End는 frontend 디렉토리의 <a href="/frontend/README.md">README.md</a> 참고
+- Back-End는 src/main/java/com/mighty/webreport 디렉토리의 <a href="/src/main/java/com/mighty/webreport/README.md">README.md</a> 참고
 
 <h3 id="dataBase">DataBase</h3>
 
@@ -78,7 +78,7 @@ jwt.expireMs는 로그인 유지시간으로 <br/>
 <h3 id="projectPurpose">Project Purpose</h3>
 기존의 Web Report 보다 사용자 친화적, 속도향상, 보안강화를 목적에 두고 있습니다.
 
-1. 보안강화 :  기존의 사이트는 비밀번호를 사용자(client)단에서 encode 하여 서버에 보내줍니다. 이 과정에서 xss가 일어날 가능성이 있고, 또한 web secure가 되어있지 않아 csrf 요청에도 취약합니다. 이러한 점을 csrf에는 완전 안전, xss에는 보다 안전한 방식으로 업그레이드 합니다.
+1. 보안강화 : 기존의 사이트는 비밀번호를 사용자(client)단에서 encode 하여 서버에 보내줍니다. 이 과정에서 xss가 일어날 가능성이 있고, 또한 web secure가 되어있지 않아 csrf 요청에도 취약합니다. 이러한 점을 csrf에는 완전 안전, xss에는 보다 안전한 방식으로 업그레이드 합니다.
 
 2. 트래픽 감소 : session 방식에서 token 인증방식으로 바꾸면서 요청횟수를 줄이고,
    뿐만 아니라 데이터를 React Store기능을 활용하여 서버가 아닌 사용자(client)단에
@@ -117,12 +117,17 @@ jwt.expireMs는 로그인 유지시간으로 <br/>
 <h2 id="run">Run</h2>
 
 <h3 id="프로젝트실행">프로젝트 실행</h3>
+
 - gradle.build 빌드
+
 - 프로젝트 빌드
+
 - /src/main/java/com/mighty/webreport의 MightyWebreportApplication 파일 실행
 
 <h3 id="reactLiveServer">React Live Server</h3>
+
 터미널에서 아래 커맨드 입력
+
 ```
     $ cd /frontend
     $ npm install
@@ -132,12 +137,14 @@ jwt.expireMs는 로그인 유지시간으로 <br/>
 <h2 id="deploy">Deploy</h2>
 
 <h3 id="intellijUltimateJar배포">Intellij Ultimate jar 배포</h3>
+
 배포를 하는방법은 Intellij Ultimate IDE를 기준으로는 우측의 gradle 버튼에서<br />
 build bootJar로 빌드하거나 (이미지 참조)<br/>
 <img src="./src/main/resources/readme/bootjar.jpg" /><br/>
 
 <h3 id="cmdJar배포">cmd jar 배포</h3>
 터미널에서 프로젝트 루트위치로 가서 아래 커맨드 입력
+
 ```
     $ gradlew bootJar
 ```
@@ -148,14 +155,19 @@ build bootJar로 빌드하거나 (이미지 참조)<br/>
 <h3 id="jar파일실행">jar 파일 실행</h3>
 
 - CLI 실행 (Logger 실시간 확인, 및 debug 용)
+
 ```
     $ java -jar build.libs에 생성된파일.jar
 ```
+
 - BackGround 실행
+
 ```
     $ javaw -jar build.libs에 생성된파일.jar
 ```
+
 - BackGround 종료
+
 ```
     $ taskkill /f /im javaw.exe
     $ taskkill /f /im java.exe
