@@ -1,4 +1,4 @@
-package com.mighty.webreport.domain.repository.admin.plant;
+package com.mighty.webreport.domain.repository.jparepository;
 
 import com.mighty.webreport.domain.entity.admin.Plant;
 import org.springframework.data.jpa.repository.JpaRepository;

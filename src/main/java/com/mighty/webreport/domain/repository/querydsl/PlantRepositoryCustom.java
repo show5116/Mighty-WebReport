@@ -1,4 +1,4 @@
-package com.mighty.webreport.domain.repository.admin.plant;
+package com.mighty.webreport.domain.repository.querydsl;
 
 import com.mighty.webreport.domain.entity.admin.Plant;
 

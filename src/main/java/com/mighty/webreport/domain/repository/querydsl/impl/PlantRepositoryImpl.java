@@ -1,9 +1,7 @@
-package com.mighty.webreport.domain.repository.admin.plant;
+package com.mighty.webreport.domain.repository.querydsl.impl;
 
 import com.mighty.webreport.domain.entity.admin.Plant;
-import com.mighty.webreport.domain.entity.admin.QAuthorityRole;
-import com.mighty.webreport.domain.entity.admin.QMember;
-import com.mighty.webreport.domain.entity.admin.QPlant;
+import com.mighty.webreport.domain.repository.querydsl.PlantRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -16,7 +14,7 @@ import static com.mighty.webreport.domain.entity.admin.QPlant.plant;
 
 @Repository
 @RequiredArgsConstructor
-public class PlantRepositoryImpl implements PlantRepositoryCustom{
+public class PlantRepositoryImpl implements PlantRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 

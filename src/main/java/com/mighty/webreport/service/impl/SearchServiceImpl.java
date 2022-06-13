@@ -3,7 +3,7 @@ package com.mighty.webreport.service.impl;
 import com.mighty.webreport.domain.dto.CDODto;
 import com.mighty.webreport.domain.dto.IdTextDto;
 import com.mighty.webreport.domain.dto.LotStatusResponse;
-import com.mighty.webreport.domain.repository.lotstatus.LotStatusRepositoryCustom;
+import com.mighty.webreport.domain.repository.querydsl.LotStatusRepositoryCustom;
 import com.mighty.webreport.security.AccountContext;
 import com.mighty.webreport.service.SearchService;
 import lombok.RequiredArgsConstructor;

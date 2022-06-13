@@ -1,7 +1,7 @@
 package com.mighty.webreport.security;
 
 import com.mighty.webreport.domain.entity.admin.Member;
-import com.mighty.webreport.domain.repository.admin.MemberRepository;
+import com.mighty.webreport.domain.repository.jparepository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

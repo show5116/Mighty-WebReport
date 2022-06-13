@@ -1,4 +1,4 @@
-package com.mighty.webreport.domain.repository.system;
+package com.mighty.webreport.domain.repository.querydsl;
 
 import com.mighty.webreport.domain.dto.MenuResponse;
 

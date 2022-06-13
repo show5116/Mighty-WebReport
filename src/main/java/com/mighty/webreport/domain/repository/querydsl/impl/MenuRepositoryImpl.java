@@ -1,8 +1,7 @@
-package com.mighty.webreport.domain.repository.system;
+package com.mighty.webreport.domain.repository.querydsl.impl;
 
 import com.mighty.webreport.domain.dto.MenuResponse;
-import com.mighty.webreport.domain.entity.system.QMenuAction;
-import com.mighty.webreport.domain.entity.system.QMenuStructure;
+import com.mighty.webreport.domain.repository.querydsl.MenuRepositoryCustom;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;

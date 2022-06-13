@@ -1,4 +1,4 @@
-package com.mighty.webreport.domain.repository.system;
+package com.mighty.webreport.domain.repository.jparepository;
 
 import com.mighty.webreport.domain.entity.idclass.CalendarId;
 import com.mighty.webreport.domain.entity.system.Calendar;

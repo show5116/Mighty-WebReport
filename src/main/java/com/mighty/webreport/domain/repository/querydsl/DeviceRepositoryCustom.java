@@ -1,4 +1,4 @@
-package com.mighty.webreport.domain.repository.admin.device;
+package com.mighty.webreport.domain.repository.querydsl;
 
 import com.mighty.webreport.domain.dto.DeviceResponse;
 

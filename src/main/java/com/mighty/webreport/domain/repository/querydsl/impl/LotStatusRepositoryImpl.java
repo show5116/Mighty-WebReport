@@ -1,16 +1,12 @@
-package com.mighty.webreport.domain.repository.lotstatus;
+package com.mighty.webreport.domain.repository.querydsl.impl;
 
 import com.mighty.webreport.domain.dto.LotStatusResponse;
-import com.mighty.webreport.domain.entity.admin.QOperation;
-import com.mighty.webreport.domain.entity.automate.QAttributeStatus;
-import com.mighty.webreport.domain.entity.automate.QEquipmentLotStatus;
-import com.mighty.webreport.domain.entity.automate.QLotStatus;
+import com.mighty.webreport.domain.repository.querydsl.LotStatusRepositoryCustom;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.Expressions;
-import com.querydsl.core.util.StringUtils;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +21,7 @@ import static com.mighty.webreport.domain.entity.automate.QLotStatus.lotStatus;
 
 @Repository
 @RequiredArgsConstructor
-public class LotStatusRepositoryImpl implements LotStatusRepositoryCustom{
+public class LotStatusRepositoryImpl implements LotStatusRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 

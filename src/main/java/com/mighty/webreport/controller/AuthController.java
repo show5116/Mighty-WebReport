@@ -2,7 +2,7 @@ package com.mighty.webreport.controller;
 
 import com.mighty.webreport.domain.dto.AuthenticationDto;
 import com.mighty.webreport.domain.entity.admin.Plant;
-import com.mighty.webreport.domain.repository.admin.plant.PlantRepositoryCustom;
+import com.mighty.webreport.domain.repository.querydsl.PlantRepositoryCustom;
 import com.mighty.webreport.security.AuthCode;
 import com.mighty.webreport.service.LoginService;
 import lombok.RequiredArgsConstructor;

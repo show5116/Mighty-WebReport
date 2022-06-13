@@ -1,9 +1,7 @@
-package com.mighty.webreport.domain.repository.admin.device;
+package com.mighty.webreport.domain.repository.querydsl.impl;
 
 import com.mighty.webreport.domain.dto.DeviceResponse;
-import com.mighty.webreport.domain.entity.admin.QDevice;
-import com.mighty.webreport.domain.entity.admin.QDeviceCustomer;
-import com.mighty.webreport.domain.entity.admin.QDeviceSpec;
+import com.mighty.webreport.domain.repository.querydsl.DeviceRepositoryCustom;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +15,7 @@ import static com.mighty.webreport.domain.entity.admin.QDeviceSpec.deviceSpec;
 
 @Repository
 @RequiredArgsConstructor
-public class DeviceRepositoryImpl implements DeviceRepositoryCustom{
+public class DeviceRepositoryImpl implements DeviceRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 

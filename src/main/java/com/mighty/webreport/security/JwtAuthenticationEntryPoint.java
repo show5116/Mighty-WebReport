@@ -19,8 +19,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
         String exception = (String)request.getAttribute("exception");
-        System.out.print("exception : ");
-        System.out.println(exception);
 
         //로그인 비밀번호 틀림
         if(exception == null) {

@@ -1,4 +1,4 @@
-package com.mighty.webreport.domain.repository.lotstatus;
+package com.mighty.webreport.domain.repository.querydsl;
 
 import com.mighty.webreport.domain.dto.LotStatusResponse;
 
