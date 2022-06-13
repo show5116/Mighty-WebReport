@@ -49,8 +49,8 @@ React 개발을 위해선 nodejs를 설치해야만 합니다. cmd를 키고 아
 
 <h3 id="개발가이드">개발 가이드</h3>
 
-- Front-End는 frontend 디렉토리의 <a href="/frontend/README.md">README.md</a> 참고
-- Back-End는 src/main/java/com/mighty/webreport 디렉토리의 <a href="/src/main/java/com/mighty/webreport/README.md">README.md</a> 참고
+- Front-End는 frontend 디렉토리의 <a href="/frontend/">README.md</a> 참고
+- Back-End는 src/main/java/com/mighty/webreport 디렉토리의 <a href="/src/main/java/com/mighty/webreport/">README.md</a> 참고
 
 <h3 id="dataBase">DataBase</h3>
 
