@@ -8,9 +8,6 @@
   * <a href="#패키지구조">패키지 구조</a> 
   * <a href="#네이밍규칙">네이밍 규칙</a> 
 - <a href="#config">Config</a>
-  * <a href="#index">index.tsx</a>
-  * <a href="#App">App.tsx</a>
-  * <a href="#api">API</a>
 - <a href="#commandLine">Command Line</a>
 - <a href="#guide">Guide</a>
   * <a href="#component">Component 관리</a>
@@ -198,7 +195,7 @@ ApiUtil.interceptors.response.use(
 ```
 
 request 요청을 만들어주고, interceptor를 활용해서 header에 auth-token을 보내줍니다.</br>
-Back-End에선 요청에 이상이 있으면 errorCode를 발급하여서 마찬가지로 interceptor에서 뺏어와서 에러처리를 해줌.</br>
+Back-End에선 요청에 이상이 있으면 errorCode를 발급하여서 마찬가지로 interceptor에서 뺏어와서 에러처리를 해줍니다.</br>
 
 <h2 id="commandLine">Command Line</h2>
 
