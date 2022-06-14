@@ -150,7 +150,7 @@ sourceSets {
 }
 ```
 
-- 프로젝트 개발시 특정 url에 대한 CORS 요청 허락 (<a href="/src/main/resources/apllication.yml">application.yml</a>)
+- 프로젝트 개발시 특정 url에 대한 CORS 요청 허락 (<a href="/src/main/resources/aplication.yml">application.yml</a>)
 
 ```yaml
 app:

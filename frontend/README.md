@@ -100,7 +100,7 @@
 
 <h2 id="config">Config</h2>
 
-<h3 id="index"><a href="/src/index.tsx">index.tsx</a></h3>
+<h3 id="index"><a href="/frontend/src/index.tsx">index.tsx</a></h3>
 
 ```typescript jsx
 root.render(
@@ -120,7 +120,7 @@ BrowerRouter => React-router-dom 사용</br>
 Provider => Redux 사용</br>
 PersistGate => Redux Persist 사용(새로고침이나, 브라우저 꺼졌다 켜져도 유지)
 
-<h3 id="App"><a href="">App.tsx</a></h3>
+<h3 id="App"><a href="/frontend/src/App.tsx">App.tsx</a></h3>
 
 ```typescript jsx
 <div className="App">
@@ -144,7 +144,7 @@ PersistGate => Redux Persist 사용(새로고침이나, 브라우저 꺼졌다 �
   * Footer : copyright 및 회사정보
   * Popup : redux로 호출시 부드러운 alert 사용
 
-<h3 id="api"><a href="/src/utils/ApiUtil.ts">API</a></h3>
+<h3 id="api"><a href="/frontend/src/utils/ApiUtil.ts">API</a></h3>
 
 ```typescript
 const ApiUtil = axios.create({
@@ -223,7 +223,7 @@ Back-End에선 요청에 이상이 있으면 errorCode를 발급하여서 마찬
 
 <h3 id="component">Component 관리</h3>
 
-<a href="/src/components/common/Button.tsx">Button.tsx</a>
+<a href="/frontend/src/components/common/Button.tsx">Button.tsx</a>
 
 ```typescript jsx
 // style.Button.ts 파일을 생성 후, 아래와 같은 규칙으로 import
@@ -262,7 +262,7 @@ const Button = ({ text , color , to , type , disabled = false , ...props }: IPro
 export default Button;
 ```
 
-<a href="/src/components/common/style.Button.ts">style.Button.ts</a>
+<a href="/frontend/src/components/common/style.Button.ts">style.Button.ts</a>
 
 ```typescript
 import styled from "styled-components";
@@ -302,7 +302,7 @@ export const Container = styled.button`
 
 <h3 id="svg">svg 관리</h3>
 
-<a href="/src/assets/svg/constants.ts">constants.ts</a>
+<a href="/frontend/src/assets/svg/constants.ts">constants.ts</a>
 
 ```typescript
 // 이곳에 사용할 icon 이름을 정의해주면 됩니다.
@@ -333,7 +333,7 @@ const IconSet: Record<iconName, icon> = {
 }
 ```
 
-<a href="/src/pages/auth/Login.tsx">Login.tsx</a>의 일부
+<a href="/frontend/src/pages/auth/Login.tsx">Login.tsx</a>의 일부
 
 ```typescript jsx
     const Account = () => (<Icon icon="account" size={svgSize} color={svgColor} />)
@@ -341,11 +341,11 @@ const IconSet: Record<iconName, icon> = {
     const Factory = () => (<Icon icon="factory" size={20} />);
 ```
 
-<a href="/src/components/common/Icon.tsx">Icon.tsx</a>컴포넌트를 불러내어서 svg를 자유롭게 다뤄줄 수 있습니다.
+<a href="/frontend/src/components/common/Icon.tsx">Icon.tsx</a>컴포넌트를 불러내어서 svg를 자유롭게 다뤄줄 수 있습니다.
 
 <h3 id="color">color 관리</h3>
 
-<a href="/src/styles.color.ts">color.ts</a>
+<a href="/frontend/src/styles.color.ts">color.ts</a>
 ```typescript
 const color = {
     blue : '#7FB5FF',
@@ -358,7 +358,7 @@ const color = {
 
 <h3 id="redux">Redux 관리</h3>
 
-<a href="/src/modules/index.ts">index.ts</a>
+<a href="/frontend/src/modules/index.ts">index.ts</a>
 ```typescript
 // blacklist 는 새로고침할 시 데이터를 잃어버릴것을 넣어주면됩니다.
 const persistConfig = {
@@ -379,7 +379,7 @@ const rootReducer = combineReducers({
 
 <h3 id="popup">PopUp창 사용하기</h3>
 
-<a href="/src/pages/auth/Login.tsx">Login.tsx</a>의 일부
+<a href="/frontend/src/pages/auth/Login.tsx">Login.tsx</a>의 일부
 ```typescript
 const dispatch = useDispatch();
 dispatch(showAlertModal('경고 메세지','비밀번호','가 틀렸습니다.',undefined));
@@ -388,7 +388,7 @@ dispatch(showAlertModal('경고 메세지','비밀번호','가 틀렸습니다.'
 
 <h3 id="menu">메뉴 관리</h3>
 
-<a href="/src/components/layout/header/Menu.tsx">Menu.tsx</a>
+<a href="/frontend/src/components/layout/header/Menu.tsx">Menu.tsx</a>
 
 ```typescript jsx
 // DataBase에서 끌고올 메뉴를 미리 선언해주어야 합니다.(typeScript는 미선언시 에러)
@@ -414,5 +414,5 @@ const MenuSet: Record<menuName, ITab> = {
 
 - 사용한 폰트 : <a href="https://cactus.tistory.com/306">Pretendard</a>
 
-- Component들의 사용법은 IProps 선언한 것을 보면 알 수 있습니다. 그래도 이해가 안가는 부분이나 궁금한점은 연락 부탁드립니다.
+- Component들의 사용법은 IProps 선언한 것을 보면 알 수 있습니다.</br>이해가 안가는 부분이나 궁금한점은 연락 부탁드립니다.
 
