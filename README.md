@@ -11,6 +11,7 @@
   * <a href="#projectPurpose">Project Purpose</a>
   * <a href="#projectArchitecture">Project Architecture</a>
 - <a href="#skill">Skill</a>
+- <a href="#setting">Setting</a>
 - <a href="#run">Run</a>
   * <a href="#프로젝트실행">프로젝트 실행</a>
   * <a href="#reactLiveServer">React Live Server</a>
@@ -18,6 +19,7 @@
   * <a href="#intellijUltimateJar배포">Intellij Ultimate jar 배포</a>
   * <a href="#cmdJar배포">cmd jar 배포</a>
   * <a href="#jar파일실행">jar 파일 실행</a>
+- <a href="#management">Management</a>
 - <a href="#developerContact">Developer Contact</a>
 
 <h2 id="gettingStarted">Getting Started</h2>
@@ -36,7 +38,7 @@
 이클립스는 가장 대표적인 웹개발 무료 IDE로 모든언어를 지원해줍니다.<br/>
 Back-End 개발은 정말 편리하게 사용할 수 있으나, Front-End쪽 개발이 상당히 불친절합니다.<br/>
 React js , typescript의 자동완성이나 컴파일에러를 발견하기 조금 더 까다롭습니다.<br/>
-따라서 이 경우에는 <a herf="https://code.visualstudio.com/download">VSCode</a>를 활용해서 Front-End 개발을 따로 하는편이 좀더 편리합니다.
+따라서 이 경우에는 <a href="https://code.visualstudio.com/download">VSCode</a>를 활용해서 Front-End 개발을 따로 하는편이 좀더 편리합니다.
 
 - <a href="https://nodejs.org/ko/download/">Node.js</a>
 
@@ -89,6 +91,10 @@ jwt.expireMs는 로그인 유지시간으로 <br/>
 
 <h3 id="projectArchitecture">Project Architecture</h3>
 
+- Spring Boot, React Create App 을 기반으로 한 Restful API(<a href="https://aws.amazon.com/ko/what-is/restful-api/">참고자료</a>)
+
+- Spring Boot HikariCP를 이용한 MVC 패턴(<a href="https://kafcamus.tistory.com/11">참고자료</a>)
+
 <h2 id="skill">Skill</h2>
 
 <h3>Front-End</h3>
@@ -114,15 +120,53 @@ jwt.expireMs는 로그인 유지시간으로 <br/>
 <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the badge&logo=Oracle&logoColor=FFFFFF"/>
 </div>
 
+<h2 id="setting">Setting</h2>
+
+- 프로젝트 빌드시 React 자동 빌드 세팅 (<a href="/build.gradle">build.gradle</a>)
+
+```groovy
+def webappDir = "$projectDir/frontend"
+
+task appNpmInstall(type: NpmTask) {
+    workingDir = file("${webappDir}")
+    args = ["run", "build"]
+}
+
+task copyWebApp(type: Copy) {
+    from 'frontend/build'
+    into "build/resources/main/static"
+}
+
+copyWebApp.dependsOn(appNpmInstall)
+compileJava.dependsOn(copyWebApp)
+
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
+        }
+    }
+}
+```
+
+- 프로젝트 개발시 특정 url에 대한 CORS 요청 허락 (<a href="/src/main/resources/apllication.yml">application.yml</a>)
+
+```yaml
+app:
+  cors:
+    allowedOrigins: http://localhost:3000,http://10.13.4.153:3000
+```
+
 <h2 id="run">Run</h2>
 
 <h3 id="프로젝트실행">프로젝트 실행</h3>
 
-- gradle.build 빌드
+1. gradle.build 빌드
 
-- 프로젝트 빌드
+2. 프로젝트 빌드
 
-- /src/main/java/com/mighty/webreport의 MightyWebreportApplication 파일 실행
+3. /src/main/java/com/mighty/webreport의 MightyWebreportApplication 파일 실행
 
 <h3 id="reactLiveServer">React Live Server</h3>
 
@@ -173,6 +217,15 @@ build bootJar로 빌드하거나 (이미지 참조)<br/>
     $ taskkill /f /im java.exe
 ```
 
+<h2 id="management">Management</h2>
+
+- Commit 규칙
+    * FEAT - 기능추가
+    * STYLE - 스타일 변경
+    * CHORE - 빌드, 세팅 변경
+    * REFACTOR - 리펙토링
+    * FIX - 에러 수정
+  
 <h2 id="developerContact">Developer Contact</h2>
 
 - 이메일 링크 : <yyj161091@gmail.com>
