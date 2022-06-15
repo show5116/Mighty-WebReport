@@ -20,7 +20,7 @@ const Routing = () => {
             localStorage.getItem("auth-token")===null ||
             localStorage.getItem("auth-token")===undefined)) {
             dispatch(setLogOut());
-            navigate("/login?error=token-error");
+            navigate("/login");
         }
     },[dispatch,navigate,authState.isLogin]);
 

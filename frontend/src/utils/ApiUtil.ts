@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const LoginUtil = axios.create({
-    baseURL : `http://${window.location.hostname}:8080`,
+    baseURL : `http://${window.location.hostname}:8080/api`,
     timeout: 30000,
     headers: {
         "Content-Type" : 'application/json;charset=UTF-8',
@@ -11,7 +11,7 @@ export const LoginUtil = axios.create({
 });
 
 const ApiUtil = axios.create({
-    baseURL : `http://${window.location.hostname}:8080`,
+    baseURL : `http://${window.location.hostname}:8080/api`,
     timeout: 30000,
     headers: {
         "Content-Type" : 'application/json;charset=UTF-8',
@@ -25,7 +25,8 @@ ApiUtil.interceptors.request.use(
         if(config.headers !== undefined){
             const token = localStorage.getItem('auth-token');
             if(token===null || token === undefined){
-                window.location.href="/login?error=token-error";
+                alert("시발");
+                window.location.href="/login";
                 config.headers.Authorization = "";
             }else{
                 config.headers.Authorization = token;

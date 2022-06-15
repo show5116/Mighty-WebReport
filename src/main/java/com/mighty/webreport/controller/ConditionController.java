@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/condition")
+@RequestMapping("/api/condition")
 public class ConditionController {
 
     private final ConditionService conditionService;
