@@ -30,6 +30,7 @@
 <h2 id="priorKnowledge">Prior Knowledge</h2>
 
 - java(jdk8)
+- Lombok(getter, setter, EqualsAndHashCode, RequiredArgsConstructor 등...)
 - RESTful API
     * URI 규칙(<a href="https://sabarada.tistory.com/28?category=800100">참고자료</a>)
     * http method(<a href="https://sabarada.tistory.com/29">참고자료</a>)
@@ -41,7 +42,7 @@
 
 <h2 id="mvcPattern">MVC Pattern</h2>
 
-<img src="/src/main/resources/readme/MVC.jpg">
+<img src="/src/main/resources/readme/MVC.JPG">
 
 - Controller : 컨트롤러는 Client와 데이터를 이어주는 다리역할입니다. 데이터를 가공하거나, 수정하는 코드를 작성하지 말고</br>
 **request**, **response**의 데이터를 이어주는 코드를 작성하면 됩니다. Service로부터 데이터를 받아올때는 HashMap을 사용해 데이터를 받아오고,</br>
