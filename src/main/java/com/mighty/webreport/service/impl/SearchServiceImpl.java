@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ public class SearchServiceImpl implements SearchService {
     private final LotStatusRepositoryCustom lotStatusRepositoryCustom;
 
     @Override
+    @Transactional(readOnly = true)
     public void getLotStatus(HashMap<String,Object> hashMap , CDODto dto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AccountContext accountContext = (AccountContext) authentication.getPrincipal();

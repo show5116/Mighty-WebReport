@@ -49,15 +49,15 @@ public class JDBCExampleRepository {
         sql.append("  and status <> '99' ");
 
         if (!operations.isEmpty()){
-            sql.append("  and ( a.operation IN ( '" + operations + "' ) ) ");
+            sql.append("  and ( a.operation IN ( " + operations + " ) ) ");
         }
 
         if (!devices.isEmpty()){
-            sql.append("  and ( a.device IN ( '" + devices + "' ) ) ");
+            sql.append("  and ( a.device IN ( " + devices + " ) ) ");
         }
 
         if (!customers.isEmpty()){
-            sql.append("   and a.customer in ('" + customers + "') ");
+            sql.append("   and a.customer in ( " + customers + ") ");
         }
 
         sql.append("order by LENGTH(a.OPERATION), 1,2,3,8,9");
