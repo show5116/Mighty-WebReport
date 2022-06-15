@@ -110,10 +110,10 @@ public class ConditionServiceImpl implements ConditionService {
 ├── domain/
 │   ├── dto/
 │   ├── entity/
-│   └── repository
-│       ├── jdbcrepository
-│       ├── jparepository
-│       └── querydsl
+│   └── repository/
+│       ├── jdbcrepository/
+│       ├── jparepository/
+│       └── querydsl/
 ├── security/
 └── service/
 ```
@@ -358,7 +358,7 @@ Bean을 가져오는 방법은 크게 2가지가 존재합니다.
 <h3 id="getUser">How to get User</h3>
 
 - Spring Security에서 filter로부터 JWT토큰을 받아 현재 로그인되어있는 유저의 정보를 받아와줍니다.</br>
-  <a href="/src/main/java/com/mighty/webreport/service/impl/JDBCExampleServiceImpl.java">JDBCExampleServiceImpl</a>중 일부
+  <a href="/src/main/java/com/mighty/webreport/service/impl/JDBCExampleServiceImpl.java">JDBCExampleServiceImpl.java</a>중 일부
 ```java
 @Override
 @Transactional(readOnly = true)
