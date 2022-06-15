@@ -4,9 +4,9 @@ import backGroundImg from "../../assets/img/m_img_tami.jpg"
 
 export const Container = styled.div`
   min-width: 1000px;
-  min-height: 600px;
+  height: calc( 100vh - 80px);
   .form-container{
-    padding: 100px 15px;
+    padding: 100px 16px;
     margin: auto;
     background-image: url(${backGroundImg});
     background-position: center center;
@@ -14,8 +14,8 @@ export const Container = styled.div`
     background-color: white;
     .login-form{
       margin-left: 33.33%;
-      width: 33.33%;
-      padding: 32px;
+      width: 500px;
+      padding: 35px;
       background: ${color.white};
       border: solid 1px ${color.lightgray};
       box-shadow: 0 0 3px ${color.lightgray};

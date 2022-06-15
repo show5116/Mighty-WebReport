@@ -28,6 +28,7 @@ const TabMenu = () => {
                         selected={selectIndex===index}
                         onClick={(event)=>setSelectIndex(index)}
                         label={element.label}
+                        labelKor={element.labelKor}
                     />
                 ))}
             </div>

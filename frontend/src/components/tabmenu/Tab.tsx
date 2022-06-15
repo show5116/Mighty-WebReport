@@ -7,12 +7,14 @@ import {MouseEventFunction} from "../../types/type";
 interface IProps {
     selected : boolean;
     label : string;
+    labelKor : string;
     onClick : MouseEventFunction;
 }
 
-const Tab = ({selected , label , onClick}:IProps) => {
+const Tab = ({selected , label , labelKor , onClick}:IProps) => {
 
     const tabList = useSelector((state:RootState)=>state.tabMenuReducer);
+    const langState = useSelector((state:RootState) => state.langReducer);
     const dispatch = useDispatch();
 
     const onDelete = (event:React.MouseEvent<HTMLDivElement>) => {
@@ -32,7 +34,7 @@ const Tab = ({selected , label , onClick}:IProps) => {
             <div
                 className='tab-label'
             >
-                {label}
+                {langState.isKor ? labelKor : label}
             </div>
             <div
                 className='tab-delete'
