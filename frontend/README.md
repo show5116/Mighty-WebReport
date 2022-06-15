@@ -411,5 +411,7 @@ const MenuSet: Record<menuName, ITab> = {
 
 - 사용한 폰트 : <a href="https://cactus.tistory.com/306">Pretendard</a>
 
-- Component들의 사용법은 IProps 선언한 것을 보면 알 수 있습니다.</br>이해가 안가는 부분이나 궁금한점은 연락 부탁드립니다.
+- Component들의 사용법은 IProps 선언한 것을 통해 대략적인 활용방법을 알 수 있습니다.</br>
+
+- 이해가 안가는 부분이나 궁금한점은 연락 부탁드립니다.
 
