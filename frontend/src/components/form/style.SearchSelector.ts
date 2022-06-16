@@ -17,6 +17,7 @@ export const Container = styled.div`
     margin-bottom: 10px;
   }
   .change-container{
+    cursor: pointer;
     .change{
       position: absolute;
       top: 6px;
@@ -31,7 +32,7 @@ export const Container = styled.div`
     }
   }
   .change-container:hover{
-    cursor: pointer;
+    opacity: 0.7;
   }
   .search-box{
     position: relative;

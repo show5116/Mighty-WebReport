@@ -1,7 +1,8 @@
 // 사용할 svg Icon
 export type iconName = "account" | "lock" | "logout" | "factory" |
     "sun" | "moon" | "search" | "x" | "change" | "caretDown" | "arrow" |
-    "expand" | "minimize" | "doubleUp" | "doubleDown" | "excel";
+    "expand" | "minimize" | "doubleUp" | "doubleDown" | "excel" |
+    "grid" | "gridOff";
 type TFillRule = "nonzero" | "evenodd" | "inherit";
 type TStrokeLineCap = "inherit" | "butt" | "round" | "square";
 type TStrokeLineJoin = "inherit" | "round" | "miter" | "bevel";
@@ -129,6 +130,15 @@ const IconSet: Record<iconName, icon> = {
             " 2.643c.183.292.665.292.848 0l1.652-2.643a.499.499 0 0 1 .689-.16.5.5 0 0 1 .16.689l-2.169 3.47a.497.497 0 0 0 0 .53l2.168 3.47a.5.5 0 0 1-.159.689.513.513 0 0 1-.689-.16L7.424 13.62a.502.502 0 0 0-.848.001l-1.652 2.643a.514.514 0 0 1-.689.16.5.5 0 0 " +
             "1-.159-.689zM14 12.5h3v2h-3v-2zm4 0h5v2h-5v-2zm0-1v-2h5v2h-5zm0-3v-2h5v2h-5zm-1 0h-3v-2h3v2zm-3 7h3v2h-3v-2zm4 0h5v2h-5v-2zm5-10h-5v-2h5v2zm-6-2v2h-3v-2h3zm-3 15h3v2h-3v-2zm4 2v-2h5v2h-5z",
         viewBox : "0 0 24 24",
+    },
+    grid : {
+        path : "M40 4h-32c-2.21 0-4 1.79-4 4v32c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4v-32c0-2.21-1.79-4-4-4zm-24 36h-8v-8h8v8zm0-12h-8v-8h8v8zm0-12h-8v-8h8v8zm12 24h-8v-8h8v8zm0-12h-8v-8h8v8zm0-12h-8v-8h8v8zm12 24h-8v-8h8v8zm0-12h-8v-8h8v8zm0-12h-8v-8h8v8z",
+        viewBox : "0 0 48 48"
+    },
+    gridOff : {
+        path : "M16 8v2.91l4 4v-6.91h8v8h-6.91l4 4h2.91v2.91l4 4v-6.91h8v8h-6.91l4 4h2.91v2.91l4 4v-30.91c0-2.21-1.79-4-4-4h-30.91l4 4h2.91zm16 0h8v8h-8v-8zm-29.45-5.45l-2.55 2.54 4 4v30.91c0 2.21 1.79 4 4 4h30.91l4 4 2.54-2.55-42.9-42.9zm17.45 22.54l2.91 2.91h-2.91v-2.91zm-12-12l2.91 2.91h-2.91v-2.91zm8 " +
+            "26.91h-8v-8h8v8zm0-12h-8v-8h6.91l1.09 1.09v6.91zm12 12h-8v-8h6.91l1.09 1.09v6.91zm4 0v-2.91l2.91 2.91h-2.91z",
+        viewBox : "0 0 48 48"
     }
 }
 

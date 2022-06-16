@@ -13,7 +13,7 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
         if(props.isViewAll){
             return `650px`;
         }else if(props.isLookDown){
-            return `380px`;
+            return `400px`;
         }else {
             return `650px`;
         }

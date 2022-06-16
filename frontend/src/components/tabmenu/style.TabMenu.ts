@@ -2,7 +2,6 @@ import styled from "styled-components";
 import color from "../../styles/color";
 
 export const Container = styled.div`
-  height: 100%;
   margin-left: 30px;
   margin-right: 30px;
   position: relative;
@@ -16,6 +15,9 @@ export const Container = styled.div`
     border-bottom: 1px solid lightgray;
   }
   .tabContent{
+    border-left: 1px solid ${color.lightgray};
+    border-right: 1px solid ${color.lightgray};
+    border-bottom: 1px solid ${color.lightgray};
     padding: 10px;
     height: 100%;
   }

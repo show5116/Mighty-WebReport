@@ -13,15 +13,13 @@ const root = ReactDOM.createRoot(
 
 
 root.render(
-  <React.StrictMode>
-      <BrowserRouter>
-          <Provider store={store}>
-              <PersistGate persistor={persistor}>
-                  <App />
-              </PersistGate>
-          </Provider>
-      </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+      <Provider store={store}>
+          <PersistGate persistor={persistor}>
+              <App />
+          </PersistGate>
+      </Provider>
+  </BrowserRouter>
 );
 
 reportWebVitals();

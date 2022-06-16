@@ -24,18 +24,18 @@ export const Container = styled.div<{isViewAll:boolean}>`
       cursor: pointer;
       border: 0;
       background-color: inherit;
-      margin-right: 10px;
+      margin-right: 4px;
     }
     .expand-btn{
       cursor: pointer;
+    }
+    svg:hover{
+      opacity: 0.7;
     }
   }
   .result-header{
     display: flex;
     margin-bottom: 10px;
     padding-right: 20px;
-  }
-  .result-main{
-    
   }
 `;
