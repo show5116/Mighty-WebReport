@@ -26,7 +26,18 @@ public class ConditionController {
         HashMap<String, Object> hashMap = new HashMap<>();
         conditionService.getCustomers(hashMap,accountContext.getPlant());
         conditionService.getOperations(hashMap,accountContext.getPlant());
+        conditionService.getDevicesWithCustomers(hashMap, accountContext.getPlant());
+        return ResponseEntity.ok(hashMap);
+    }
+
+    @GetMapping("/operationAndDeviceAndLotNumber")
+    public ResponseEntity<?> getOperationAndDeviceAndLotNumber(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AccountContext accountContext = (AccountContext) authentication.getPrincipal();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        conditionService.getOperations(hashMap,accountContext.getPlant());
         conditionService.getDevices(hashMap, accountContext.getPlant());
+        conditionService.getLotNumbers(hashMap, accountContext.getPlant());
         return ResponseEntity.ok(hashMap);
     }
 

@@ -26,10 +26,27 @@ interface IProps {
     setIsLookDown : React.Dispatch<SetStateAction<boolean>>;
     isDatePicker? : boolean;
     isDateRange? : boolean;
+    startDate? : Date;
+    endDate? : Date;
+    setStartDate? : React.Dispatch<SetStateAction<Date>>;
+    setEndDate? : React.Dispatch<SetStateAction<Date>>;
 }
 
-const TableForm = ({ name , tableHeaders , tableBodies , CSVHeaders , CSVData , isLookDown , setIsLookDown , isDatePicker=false , isDateRange=false }:IProps) => {
-
+const TableForm = ({
+    name,
+    tableHeaders,
+    tableBodies,
+    CSVHeaders,
+    CSVData,
+    isLookDown,
+    setIsLookDown,
+    isDatePicker=false,
+    isDateRange=false,
+    startDate,
+    endDate,
+    setStartDate,
+    setEndDate
+}:IProps) => {
     const MENU_ID = "table-context-menu";
 
     const [isViewAll,setIsViewAll] = useState(false);
@@ -48,6 +65,10 @@ const TableForm = ({ name , tableHeaders , tableBodies , CSVHeaders , CSVData , 
             <div className='result-header'>
                 {isDatePicker &&
                     <DatePickerForm
+                        startDate={startDate}
+                        endDate={endDate}
+                        setStartDate={setStartDate}
+                        setEndDate={setEndDate}
                         isRangeSearch={isDateRange}
                     />
                 }

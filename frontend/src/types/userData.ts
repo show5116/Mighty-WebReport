@@ -19,6 +19,11 @@ export interface IDevice {
     customer : string;
 }
 
+export interface ILotNumber {
+    id : string;
+    text : string;
+}
+
 export interface IPlantTable {
     id : string;
     description? : string | null;

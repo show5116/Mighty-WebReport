@@ -7,4 +7,5 @@ import java.util.List;
 public interface DeviceRepositoryCustom {
 
     public List<DeviceResponse> getDevice(String plant);
+    public List<DeviceResponse> getDeviceWithCustomers(String plant);
 }

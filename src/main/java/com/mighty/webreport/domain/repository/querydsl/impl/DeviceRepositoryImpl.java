@@ -24,6 +24,20 @@ public class DeviceRepositoryImpl implements DeviceRepositoryCustom {
         return jpaQueryFactory
                 .select(Projections.fields(DeviceResponse.class,
                         deviceSpec.device.deviceId,
+                        deviceSpec.device.description))
+                .from(deviceSpec)
+                .innerJoin(deviceSpec.device , device)
+                .where(deviceSpec.device.plant.eq(plant)
+                .and(deviceSpec.disContinue.eq('N')))
+                .orderBy(deviceSpec.deviceId.asc())
+                .fetch();
+    }
+
+    @Override
+    public List<DeviceResponse> getDeviceWithCustomers(String plant) {
+        return jpaQueryFactory
+                .select(Projections.fields(DeviceResponse.class,
+                        deviceSpec.device.deviceId,
                         deviceSpec.device.description,
                         deviceCustomer.customer))
                 .from(deviceSpec)

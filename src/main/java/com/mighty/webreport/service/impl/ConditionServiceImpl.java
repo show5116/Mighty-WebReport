@@ -2,6 +2,7 @@ package com.mighty.webreport.service.impl;
 
 import com.mighty.webreport.domain.dto.CustomerDto;
 import com.mighty.webreport.domain.dto.DeviceResponse;
+import com.mighty.webreport.domain.dto.LotNumberResponse;
 import com.mighty.webreport.domain.dto.OperationResponse;
 import com.mighty.webreport.domain.entity.admin.Customer;
 import com.mighty.webreport.domain.repository.jparepository.CustomerRepository;
@@ -49,5 +50,20 @@ public class ConditionServiceImpl implements ConditionService {
     public void getDevices(HashMap<String, Object> hashMap, String plant) {
         List<DeviceResponse> devices = deviceRepositoryCustom.getDevice(plant);
         hashMap.put("devices",devices);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void getDevicesWithCustomers(HashMap<String, Object> hashMap, String plant) {
+        List<DeviceResponse> devices = deviceRepositoryCustom.getDeviceWithCustomers(plant);
+        hashMap.put("devices",devices);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void getLotNumbers(HashMap<String, Object> hashMap, String plant) {
+        // 추후에 구현해야함
+        List<LotNumberResponse> lotNumbers = new ArrayList<>();
+        hashMap.put("lotNumbers",lotNumbers);
     }
 }

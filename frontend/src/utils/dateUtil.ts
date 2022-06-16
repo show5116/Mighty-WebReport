@@ -22,3 +22,7 @@ export const getTodayString = () => {
 const padZero = (number:number) => {
     return number.toString().padStart(2,'0');
 }
+
+export const getDateString = (date:Date) => {
+    return `${date.getFullYear()}${padZero(date.getMonth()+1)}${padZero(date.getDate())}${padZero(date.getHours())}${padZero(date.getMinutes())}${padZero(date.getSeconds())}`;
+}

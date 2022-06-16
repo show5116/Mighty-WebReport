@@ -1,8 +1,7 @@
 package com.mighty.webreport.service.impl;
 
-import com.mighty.webreport.domain.dto.CDODto;
-import com.mighty.webreport.domain.dto.IdTextDto;
-import com.mighty.webreport.domain.dto.LotStatusResponse;
+import com.mighty.webreport.domain.dto.*;
+import com.mighty.webreport.domain.repository.jdbcrepository.LbrHistoryRepository;
 import com.mighty.webreport.domain.repository.querydsl.LotStatusRepositoryCustom;
 import com.mighty.webreport.security.AccountContext;
 import com.mighty.webreport.service.SearchService;
@@ -21,6 +20,8 @@ import java.util.List;
 public class SearchServiceImpl implements SearchService {
 
     private final LotStatusRepositoryCustom lotStatusRepositoryCustom;
+
+    private final LbrHistoryRepository lbrHistoryRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -51,5 +52,23 @@ public class SearchServiceImpl implements SearchService {
                 devices);
 
         hashMap.put("lotStatus",lotStatus);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void getDefectStatus(HashMap<String, Object> hashMap, ODLDateDto dto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AccountContext accountContext = (AccountContext) authentication.getPrincipal();
+
+        List<DefectResponse> defectStatus = lbrHistoryRepository.getDefectStatus(
+                accountContext.getPlant(),
+                dto.getDates().getStartDate(),
+                dto.getDates().getEndDate(),
+                dto.getDevicesString(),
+                dto.getOperationsString(),
+                dto.getLotNumbersString()
+        );
+
+        hashMap.put("defectStatus",defectStatus);
     }
 }

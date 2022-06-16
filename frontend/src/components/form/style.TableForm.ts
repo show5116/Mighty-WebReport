@@ -8,6 +8,7 @@ export const Container = styled.div<{isViewAll:boolean}>`
     top: 0;
     left: 0;  
     z-index: 10;
+    width : 100%;
     overflow: auto;
   `}
   .btn-container{

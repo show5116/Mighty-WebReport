@@ -1,14 +1,17 @@
 import * as S from './style.DatePickerForm';
 import DatePicker from 'react-datepicker';
-import React, {useState} from "react";
+import React, {SetStateAction, useState} from "react";
 import Icon from "../common/Icon";
 import {useSelector} from "react-redux";
 import {RootState} from "../../modules";
 
 interface IProps {
-    isRangeSearch?: boolean
+    isRangeSearch?: boolean;
+    startDate?: Date;
+    endDate?: Date;
+    setStartDate? : React.Dispatch<SetStateAction<Date>>;
+    setEndDate? : React.Dispatch<SetStateAction<Date>>;
 }
-
 
 const monthsKor = [
     "1월",
@@ -40,11 +43,9 @@ const monthsEng = [
     "December"
 ]
 
-const DatePickerForm = ({ isRangeSearch = false}:IProps) => {
+const DatePickerForm = ({startDate , endDate , isRangeSearch = false , setStartDate , setEndDate }:IProps) => {
 
     const langState = useSelector((state:RootState) => state.langReducer);
-    const [startDate,setStartDate] = useState(new Date());
-    const [endDate,setEndDate] = useState(new Date());
 
     return (
       <S.Container isRangeSearch={isRangeSearch}>
@@ -52,7 +53,7 @@ const DatePickerForm = ({ isRangeSearch = false}:IProps) => {
               <DatePicker
                   selected={startDate}
                   dateFormat="yyyy-MM-dd"
-                  onChange={date => date!==null && setStartDate(date)}
+                  onChange={date => date!==null && (setStartDate && setStartDate(date))}
                   maxDate={endDate}
                   selectsStart={true}
                   renderCustomHeader={({
@@ -96,7 +97,7 @@ const DatePickerForm = ({ isRangeSearch = false}:IProps) => {
                       <DatePicker
                           selected={endDate}
                           dateFormat="yyyy-MM-dd"
-                          onChange={date => date!==null && setEndDate(date)}
+                          onChange={date => date!==null && (setEndDate && setEndDate(date))}
                           minDate={startDate}
                           maxDate={new Date()}
                           selectsStart={true}

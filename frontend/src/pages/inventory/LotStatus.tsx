@@ -249,8 +249,6 @@ const LotStatus = () => {
             ))}
             </tbody>
         ));
-
-        return
     },[searchData]);
 
     const changeCondition = () => {
