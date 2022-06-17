@@ -4,7 +4,7 @@ import color from "../../styles/color";
 export const Container = styled.div<{ isRangeSearch:boolean }>`
   position: relative;
   border: 1px solid ${color.lightgray};
-  width:  ${(props) => props.isRangeSearch ? "220px" : "110px"};
+  width:  ${(props) => props.isRangeSearch ? "230px" : "110px"};
   padding: 5px 10px;
   border-radius: 20px;
   display: flex;
@@ -14,10 +14,10 @@ export const Container = styled.div<{ isRangeSearch:boolean }>`
   & .date-picker-container svg{
     position: absolute;
     top: 4px;
-    right: -8px;
+    right: -12px;
   }
   & .react-datepicker__input-container>input{
-    width: 74px;
+    width: 80px;
     border: 0;  
   }
   & .end-date .react-datepicker__input-container>input{
@@ -111,7 +111,7 @@ export const Container = styled.div<{ isRangeSearch:boolean }>`
   .range {
     position: absolute;
     top: 0px;
-    left: 100px;
+    left: 105px;
     font-size: 24px;
     font-weight: 100;
     
