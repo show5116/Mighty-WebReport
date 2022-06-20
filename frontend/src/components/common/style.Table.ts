@@ -21,7 +21,7 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
     grid-template-columns: ${(props) => (props.headers.map((header)=> {
         return `minmax(${header.width},1fr) `;   
     }))}; 
-    grid-template-rows: repeat(auto-fill, 20px);
+    grid-template-rows: 30px repeat(auto-fill, 20px);
   }
 
   table thead,
@@ -40,7 +40,7 @@ export const Container = styled.div<{headers:TableHeader[] , isViewAll:boolean ,
   }
   
   table th{
-    height: 20px;
+    height: 30px;
   }
   
   table th,

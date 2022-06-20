@@ -1,6 +1,6 @@
 import * as S from './style.Table';
 import { TableHeader } from "../../types/type";
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 
 interface IProps {
     headers : TableHeader[];
@@ -30,6 +30,8 @@ const Table = ({ headers , bodies ,isViewAll , isLookDown }:IProps) => {
     const tableElement = useRef<HTMLTableElement>(null);
     const columns:Headers[] = createHeaders(headers);
     const minCellWidth:number = 22;
+
+    const bodiesMemo = useMemo(()=> {return bodies}, [bodies]);
 
     const mouseDown = (index:number) => {
       setActiveIndex(index);
@@ -108,7 +110,7 @@ const Table = ({ headers , bodies ,isViewAll , isLookDown }:IProps) => {
                         ))}
                     </tr>
                 </thead>
-                {bodies}
+                {bodiesMemo}
             </table>
         </S.Container>
     );

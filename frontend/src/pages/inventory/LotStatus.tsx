@@ -1,5 +1,5 @@
 import * as S from './style.LotStatus';
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useTransition} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../modules";
 import SearchSelector from "../../components/form/SearchSelector";
@@ -9,6 +9,7 @@ import {CSVHeader, ISearchBox, TableHeader} from "../../types/type";
 import TableForm from "../../components/form/TableForm";
 import {getDate, getMonthToMinute} from "../../utils/dateUtil";
 import {showAlertModal} from "../../modules/action/alertAction";
+import Loading from "../../components/common/Loading";
 
 interface OperationCol {
     colCount: number;
@@ -73,6 +74,7 @@ const LotStatus = () => {
     const [searchData,setSearchData] = useState<ILotStatus[]>([]);
     const [isLookDown,setIsLookDown] = useState(false);
     const [tableBodies, setTableBodies] = useState<JSX.Element>((<tbody></tbody>));
+    const [isPending, startTransition] = useTransition();
     const dispatch = useDispatch();
     const langState = useSelector((state:RootState) => state.langReducer);
 
@@ -198,57 +200,58 @@ const LotStatus = () => {
                 break;
             }
         }
-
-        setTableBodies((
-            <tbody
-                key={"bodies"}
-            >
-            {searchData.map((element,index) => (
-                <React.Fragment
-                    key={"body"+index}
+        startTransition(()=>{
+            setTableBodies((
+                <tbody
+                    key={"bodies"}
                 >
-                    <tr>
-                        {element.isOperation && (
+                {searchData.map((element,index) => (
+                    <React.Fragment
+                        key={"body"+index}
+                    >
+                        <tr>
+                            {element.isOperation && (
+                                <td
+                                    style={{
+                                        // @ts-ignore
+                                        gridRow : `span ${element.colSpan+1}`
+                                    }}
+                                    className="td-operation"
+                                >
+                                    <span>{element.operation}</span>
+                                </td>
+                            )}
+                            <td><span>{element.lotNumber}</span></td>
+                            <td><span>{element.mainLot}</span></td>
                             <td
-                                style={{
-                                    // @ts-ignore
-                                    gridRow : `span ${element.colSpan+1}`
-                                }}
-                                className="td-operation"
-                            >
-                                <span>{element.operation}</span>
-                            </td>
-                        )}
-                        <td><span>{element.lotNumber}</span></td>
-                        <td><span>{element.mainLot}</span></td>
-                        <td
-                            style={{ textAlign : "right"}}
-                        ><span>{element.qtyOne}</span></td>
-                        <td><span>{element.qtyUnitOne}</span></td>
-                        <td
-                            style={{ textAlign : "right"}}
-                        ><span>{element.qtyTwo}</span></td>
-                        <td><span>{element.qtyUnitTwo}</span></td>
-                        <td><span>{element.device}</span></td>
-                        <td><span>{element.customer}</span></td>
-                        <td><span>{element.inHold}</span></td>
-                        <td><span>{element.inRework}</span></td>
-                        <td><span>{element.holdNote}</span></td>
-                        <td><span>{element.processFlag}</span></td>
-                        <td><span>{element.deviceVer}</span></td>
-                        <td><span>{element.deviceAttribute}</span></td>
-                        <td><span>{element.shipAttribute}</span></td>
-                        <td><span>{element.route}</span></td>
-                        <td><span>{
-                            typeof element.enterOperTime === "string" &&
-                            getMonthToMinute(getDate(element.enterOperTime))
-                        }</span></td>
-                        <td><span>{element.equipmentId}</span></td>
-                    </tr>
-                </React.Fragment>
-            ))}
-            </tbody>
-        ));
+                                style={{ textAlign : "right"}}
+                            ><span>{element.qtyOne}</span></td>
+                            <td><span>{element.qtyUnitOne}</span></td>
+                            <td
+                                style={{ textAlign : "right"}}
+                            ><span>{element.qtyTwo}</span></td>
+                            <td><span>{element.qtyUnitTwo}</span></td>
+                            <td><span>{element.device}</span></td>
+                            <td><span>{element.customer}</span></td>
+                            <td><span>{element.inHold}</span></td>
+                            <td><span>{element.inRework}</span></td>
+                            <td><span>{element.holdNote}</span></td>
+                            <td><span>{element.processFlag}</span></td>
+                            <td><span>{element.deviceVer}</span></td>
+                            <td><span>{element.deviceAttribute}</span></td>
+                            <td><span>{element.shipAttribute}</span></td>
+                            <td><span>{element.route}</span></td>
+                            <td><span>{
+                                typeof element.enterOperTime === "string" &&
+                                getMonthToMinute(getDate(element.enterOperTime))
+                            }</span></td>
+                            <td><span>{element.equipmentId}</span></td>
+                        </tr>
+                    </React.Fragment>
+                ))}
+                </tbody>
+            ));
+        })
     },[searchData]);
 
     const changeCondition = () => {
@@ -276,6 +279,7 @@ const LotStatus = () => {
         <S.Container
             isLookDown={isLookDown}
         >
+            {isPending && <Loading />}
             <form onSubmit={onSubmit}>
                 <div className='condition-container'>
                     <SearchSelector

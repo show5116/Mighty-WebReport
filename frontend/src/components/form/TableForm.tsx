@@ -2,7 +2,7 @@ import * as S from './style.TableForm';
 import Table from "../common/Table";
 import {CSVHeader, TableHeader} from "../../types/type";
 import DatePickerForm from "./DatePickerForm";
-import React, {SetStateAction, useState} from "react";
+import React, {SetStateAction, useMemo, useState} from "react";
 import Icon from "../common/Icon";
 import { CSVLink } from "react-csv";
 import {ILotStatus} from "../../types/userData";
@@ -48,6 +48,10 @@ const TableForm = ({
     setEndDate
 }:IProps) => {
     const MENU_ID = "table-context-menu";
+
+    const tableBodiesMemo = useMemo(()=>{
+        return tableBodies;
+    },[tableBodies]);
 
     const [isViewAll,setIsViewAll] = useState(false);
     const {show} = useContextMenu({
@@ -110,7 +114,7 @@ const TableForm = ({
             >
                 <Table
                     headers={tableHeaders}
-                    bodies={tableBodies}
+                    bodies={tableBodiesMemo}
                     isViewAll={isViewAll}
                     isLookDown={isLookDown}
                 />
