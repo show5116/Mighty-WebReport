@@ -11,6 +11,7 @@ import FinalPTESTYield from "../../../pages/yield/FinalPTESTYield";
 import MonthlySalesPerformance from "../../../pages/sales/MonthlySalesPerformance";
 import {setTabList} from "../../../modules/action/tabMenuAction";
 import ViewDefectStatus from "../../../pages/inventory/ViewDefectStatus";
+import DailyMovement from '../../../pages/product/DailyMovement';
 
 type menuName = string | "Daily Movement" | "Operation Movement Monitoring" |
     "Daily Shipping Status" | "Fab Out Status By Device" | "View LOT Status" |
@@ -22,7 +23,7 @@ const MenuSet: Record<menuName, ITab> = {
     "Daily Movement" : {
         label : "Daily Movement",
         labelKor : "Daily Movement",
-        children : <LotStatus />
+        children : <DailyMovement />
     },
     "View LOT Status" : {
         label : "View LOT Status",

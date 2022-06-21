@@ -1,7 +1,7 @@
-package com.mighty.webreport.domain.repository.querydsl.impl;
+package com.mighty.webreport.repository.querydsl.impl;
 
 import com.mighty.webreport.domain.dto.LotStatusResponse;
-import com.mighty.webreport.domain.repository.querydsl.LotStatusRepositoryCustom;
+import com.mighty.webreport.repository.querydsl.LotStatusRepositoryCustom;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;

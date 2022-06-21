@@ -1,5 +1,6 @@
-package com.mighty.webreport.domain.repository.jdbcrepository;
+package com.mighty.webreport.repository.jdbcrepository;
 
+import com.mighty.webreport.domain.dto.LotNumberResponse;
 import com.mighty.webreport.domain.dto.LotStatusResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
@@ -90,4 +91,5 @@ public class JDBCExampleRepository {
 
         return namedParameterJdbcTemplate.query(sql.toString(),namedParameters,lotStatusMapper);
     }
+
 }

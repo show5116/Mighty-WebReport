@@ -2,7 +2,7 @@ package com.mighty.webreport.service.impl;
 
 import com.mighty.webreport.domain.dto.CDODto;
 import com.mighty.webreport.domain.dto.LotStatusResponse;
-import com.mighty.webreport.domain.repository.jdbcrepository.JDBCExampleRepository;
+import com.mighty.webreport.repository.jdbcrepository.JDBCExampleRepository;
 import com.mighty.webreport.security.AccountContext;
 import com.mighty.webreport.service.JDBCExampleService;
 import lombok.RequiredArgsConstructor;

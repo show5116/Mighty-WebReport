@@ -1,4 +1,4 @@
-package com.mighty.webreport.domain.repository.jparepository;
+package com.mighty.webreport.repository.jparepository;
 
 import com.mighty.webreport.domain.dto.OperationResponse;
 import com.mighty.webreport.domain.entity.admin.Operation;
