@@ -1,4 +1,4 @@
-package com.mighty.webreport.domain.repository.jparepository;
+package com.mighty.webreport.repository.jparepository;
 
 import com.mighty.webreport.domain.entity.admin.Customer;
 import com.mighty.webreport.domain.entity.idclass.CustomerId;

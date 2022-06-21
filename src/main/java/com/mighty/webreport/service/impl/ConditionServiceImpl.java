@@ -5,9 +5,11 @@ import com.mighty.webreport.domain.dto.DeviceResponse;
 import com.mighty.webreport.domain.dto.LotNumberResponse;
 import com.mighty.webreport.domain.dto.OperationResponse;
 import com.mighty.webreport.domain.entity.admin.Customer;
-import com.mighty.webreport.domain.repository.jparepository.CustomerRepository;
-import com.mighty.webreport.domain.repository.jparepository.OperationRepository;
-import com.mighty.webreport.domain.repository.querydsl.DeviceRepositoryCustom;
+import com.mighty.webreport.repository.jdbcrepository.JDBCExampleRepository;
+import com.mighty.webreport.repository.jdbcrepository.LotStatusJDBCRepository;
+import com.mighty.webreport.repository.jparepository.CustomerRepository;
+import com.mighty.webreport.repository.jparepository.OperationRepository;
+import com.mighty.webreport.repository.querydsl.DeviceRepositoryCustom;
 import com.mighty.webreport.service.ConditionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,10 @@ public class ConditionServiceImpl implements ConditionService {
     private final OperationRepository operationRepository;
 
     private final DeviceRepositoryCustom deviceRepositoryCustom;
+
+    private final JDBCExampleRepository jdbcExampleRepository;
+
+    private final LotStatusJDBCRepository lotStatusJDBCRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -63,7 +69,7 @@ public class ConditionServiceImpl implements ConditionService {
     @Transactional(readOnly = true)
     public void getLotNumbers(HashMap<String, Object> hashMap, String plant) {
         // 추후에 구현해야함
-        List<LotNumberResponse> lotNumbers = new ArrayList<>();
+        List<LotNumberResponse> lotNumbers =lotStatusJDBCRepository.getLotNumbers(plant);
         hashMap.put("lotNumbers",lotNumbers);
     }
 }

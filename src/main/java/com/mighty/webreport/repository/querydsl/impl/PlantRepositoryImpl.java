@@ -1,7 +1,7 @@
-package com.mighty.webreport.domain.repository.querydsl.impl;
+package com.mighty.webreport.repository.querydsl.impl;
 
 import com.mighty.webreport.domain.entity.admin.Plant;
-import com.mighty.webreport.domain.repository.querydsl.PlantRepositoryCustom;
+import com.mighty.webreport.repository.querydsl.PlantRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

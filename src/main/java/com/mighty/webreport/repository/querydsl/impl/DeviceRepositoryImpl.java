@@ -1,7 +1,7 @@
-package com.mighty.webreport.domain.repository.querydsl.impl;
+package com.mighty.webreport.repository.querydsl.impl;
 
 import com.mighty.webreport.domain.dto.DeviceResponse;
-import com.mighty.webreport.domain.repository.querydsl.DeviceRepositoryCustom;
+import com.mighty.webreport.repository.querydsl.DeviceRepositoryCustom;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

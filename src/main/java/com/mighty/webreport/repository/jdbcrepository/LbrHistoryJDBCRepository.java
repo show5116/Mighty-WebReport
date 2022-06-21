@@ -1,4 +1,4 @@
-package com.mighty.webreport.domain.repository.jdbcrepository;
+package com.mighty.webreport.repository.jdbcrepository;
 
 import com.mighty.webreport.domain.dto.DefectResponse;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class LbrHistoryRepository {
+public class LbrHistoryJDBCRepository {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 

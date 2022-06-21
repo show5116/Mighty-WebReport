@@ -1,8 +1,8 @@
 package com.mighty.webreport.service.impl;
 
 import com.mighty.webreport.domain.dto.*;
-import com.mighty.webreport.domain.repository.jdbcrepository.LbrHistoryRepository;
-import com.mighty.webreport.domain.repository.querydsl.LotStatusRepositoryCustom;
+import com.mighty.webreport.repository.jdbcrepository.LbrHistoryJDBCRepository;
+import com.mighty.webreport.repository.querydsl.LotStatusRepositoryCustom;
 import com.mighty.webreport.security.AccountContext;
 import com.mighty.webreport.service.SearchService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class SearchServiceImpl implements SearchService {
 
     private final LotStatusRepositoryCustom lotStatusRepositoryCustom;
 
-    private final LbrHistoryRepository lbrHistoryRepository;
+    private final LbrHistoryJDBCRepository lbrHistoryRepository;
 
     @Override
     @Transactional(readOnly = true)
